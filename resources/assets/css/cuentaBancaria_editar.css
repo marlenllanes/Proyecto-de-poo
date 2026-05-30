@@ -1,0 +1,101 @@
+.form-wrapper {
+    max-width: 700px;
+    margin: 30px auto;
+}
+.titulo-cuenta {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+.form-cuenta {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--shadow-card);
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 18px 20px;
+    align-items: center;
+}
+.form-cuenta label {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+.form-cuenta input[type="text"],
+.form-cuenta input[type="number"],
+.form-cuenta input[type="datetime-local"],
+.form-cuenta select {
+    padding: 11px 12px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--input-text-color);
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color var(--transition-fast);
+}
+.form-cuenta input[type="text"],
+.form-cuenta input[type="number"],
+.form-cuenta input[type="datetime-local"] {
+    background-color: #e1e1e1 !important;
+    color: #333333 !important;
+}
+html[data-theme="dark"] .form-cuenta input[type="text"],
+html[data-theme="dark"] .form-cuenta input[type="number"],
+html[data-theme="dark"] .form-cuenta input[type="datetime-local"] {
+    background-color: var(--bg-input) !important;
+    color: var(--input-text-color) !important;
+}
+.form-cuenta input:focus,
+.form-cuenta select:focus {
+    border-color: var(--vibrant-color);
+    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+    outline: none;
+}
+.form-cuenta button[type="submit"] {
+    grid-column: 1 / span 2;
+    padding: 14px;
+    background-color: var(--vibrant-color);
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-mid);
+    margin-top: 6px;
+}
+html[data-theme="light"] .form-cuenta button[type="submit"]:hover {
+    background-color: #d0e8ff;
+}
+html[data-theme="dark"] .form-cuenta button[type="submit"]:hover {
+    background-color: #00ffff;
+}
+.invalid-field {
+    border-color: var(--error-color) !important;
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.25) !important;
+}
+.error-text-pro {
+    color: var(--error-color) !important;
+    font-weight: 600;
+}
+.msg-error {
+    display: none;
+    color: var(--error-color);
+    font-size: 12px;
+    margin-top: 4px;
+}
+@media (max-width: 640px) {
+    .form-cuenta {
+        grid-template-columns: 1fr;
+        padding: 22px;
+    }
+    .form-cuenta button[type="submit"] {
+        grid-column: 1;
+    }
+}

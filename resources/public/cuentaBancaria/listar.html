@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>Listado de Cuentas Bancarias</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/cuentaBancaria_listar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css" />
+        <link rel="stylesheet" href="/assets/css/footer.css" />
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/cuentaBancaria_listar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+
+        <main class="main-content-pro container">
+            <div class="tabla-wrapper-pro animated-fadeIn">
+                <h1>{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="tabla-card-pro">
+                    <table class="tabla-pro">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Número de cuenta</th>
+                                <th>Tipo</th>
+                                <th>Saldo</th>
+                                <th>Fecha apertura</th>
+                                <th>Estado</th>
+                                <th>Cliente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each cuentas}}
+                            <tr>
+                                <td>{{idCuentaBancaria}}</td>
+                                <td>{{numeroCuentaBancaria}}</td>
+                                <td>
+                                    <span class="badge-tipo {{tipoCuentaBancaria}}">
+                                        {{tipoCuentaBancaria}}
+                                    </span>
+                                </td>
+                                <td>{{saldoCuentaBancaria}}</td>
+                                <td>{{fechaAperturaCuentaBancaria}}</td>
+                                <td>
+                                    <span class="badge-estado {{estadoCuentaBancaria}}">
+                                        {{estadoCuentaBancaria}}
+                                    </span>
+                                </td>
+                                <td>{{nombreCliente}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+
+        {{include footer}}
+    </body>
+</html>

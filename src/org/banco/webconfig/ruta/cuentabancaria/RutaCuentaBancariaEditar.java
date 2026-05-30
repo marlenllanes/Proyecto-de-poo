@@ -1,5 +1,4 @@
 package org.banco.webconfig.ruta.cuentabancaria;
-
 import com.cleandev.webserver.ruteo.Router;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,14 +15,13 @@ public class RutaCuentaBancariaEditar extends ControladorBancolombia {
 
     @Override
     public void registrar(Router r) {
-
-        r.get("/cuentasbancarias/editar/:id", req -> {
+        r.get("/cuentas/editar/:id", req -> {
             try {
                 int id = Integer.parseInt(req.param("id"));
                 Optional<CuentaBancariaDto> cuenta = EnsambladorWeb.cuentaBancaria().obtenerUno(id);
                 if (cuenta.isEmpty()) {
                     req.mensaje("error", "La cuenta bancaria no existe.");
-                    return redireccionar("/cuentasbancarias/admin");
+                    return redireccionar("/cuentas/admin");
                 }
                 CuentaBancariaDto dto = cuenta.get();
                 Map<String, Object> modelo = modeloBase();
@@ -32,29 +30,38 @@ public class RutaCuentaBancariaEditar extends ControladorBancolombia {
                 modelo.put("numeroCuentaBancaria", dto.numeroCuentaBancaria());
                 modelo.put("tipoCuentaBancaria", dto.tipoCuentaBancaria());
                 modelo.put("saldoCuentaBancaria", dto.saldoCuentaBancaria());
-                modelo.put("fechaAperturaCuentaBancaria", dto.fechaAperturaCuentaBancaria());
+                modelo.put("fechaAperturaCuentaBancaria", dto.fechaAperturaCuentaBancaria() != null
+                        ? dto.fechaAperturaCuentaBancaria().toLocalDate().toString()
+                        : "");
                 modelo.put("estadoCuentaBancaria", dto.estadoCuentaBancaria());
-                modelo.put("idCliente", dto.cliente().idCliente());
-                modelo.put("clientes", EnsambladorWeb.cliente().obtenerTodos());
+                modelo.put("idCliente", dto.cliente() != null ? dto.cliente().idCliente() : null);
+                
+                modelo.put("listaClientes", EnsambladorWeb.cliente().obtenerTodos());
+                // Booleanos para el selected del tipo
+                modelo.put("esAhorros",   "ahorros".equals(dto.tipoCuentaBancaria()));
+                modelo.put("esCorriente", "corriente".equals(dto.tipoCuentaBancaria()));
+                // Booleanos para el selected del estado
+                modelo.put("esActiva",    "activa".equals(dto.estadoCuentaBancaria()));
+                modelo.put("esInactiva",  "inactiva".equals(dto.estadoCuentaBancaria()));
+                modelo.put("esBloqueada", "bloqueada".equals(dto.estadoCuentaBancaria()));
                 cargarMensajes(req, modelo);
-                return vista("cuentasbancarias/editar.html", modelo);
+                return vista("cuentaBancaria/editar.html", modelo);
             } catch (Exception e) {
                 req.mensaje("error", "ID inválido.");
-                return redireccionar("/cuentasbancarias/admin");
+                return redireccionar("/cuentas/admin");
             }
         });
 
-        r.post("/cuentasbancarias/editar/guardar", req -> {
+        r.post("/cuentas/editar/guardar", req -> {
             try {
                 Map<String, String> formulario = parsearFormulario(req);
                 int id = Integer.parseInt(formulario.get("idCuentaBancaria"));
-
                 OffsetDateTime fechaApertura = null;
-                if (formulario.get("fechaAperturaCuentaBancaria") != null && !formulario.get("fechaAperturaCuentaBancaria").isEmpty()) {
+                if (formulario.get("fechaAperturaCuentaBancaria") != null
+                        && !formulario.get("fechaAperturaCuentaBancaria").isEmpty()) {
                     LocalDate date = LocalDate.parse(formulario.get("fechaAperturaCuentaBancaria"));
                     fechaApertura = date.atStartOfDay().atOffset(ZoneOffset.UTC);
                 }
-
                 CuentaBancariaActualizarDto dto = new CuentaBancariaActualizarDto(
                         id,
                         formulario.get("numeroCuentaBancaria"),
@@ -64,21 +71,19 @@ public class RutaCuentaBancariaEditar extends ControladorBancolombia {
                         formulario.get("estadoCuentaBancaria"),
                         Integer.parseInt(formulario.get("idCliente"))
                 );
-
                 Optional<CuentaBancariaDto> resultado = EnsambladorWeb.cuentaBancaria().actualizar(id, dto);
-
                 if (resultado.isPresent()) {
                     req.mensaje("exito", "Cuenta bancaria actualizada correctamente.");
                 } else {
                     req.mensaje("error", "No se pudo actualizar la cuenta bancaria.");
                 }
-                return redireccionar("/cuentasbancarias/editar/" + id);
+                
+                return redireccionar("/cuentas/editar/" + id);
             } catch (Exception e) {
                 req.mensaje("error", "Los datos ingresados tienen un formato inválido o están vacíos.");
-                return redireccionar("/cuentasbancarias/admin");
+               
+                return redireccionar("/cuentas/admin");
             }
         });
-
     }
-
 }

@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/cuentaBancaria_editar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css" />
+        <link rel="stylesheet" href="/assets/css/footer.css" />
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/cuentaBancaria_editar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+
+        <main class="main-content-pro container">
+            <div class="form-wrapper animated-fadeIn">
+                <h1 class="titulo-cuenta">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <form action="/cuentas/editar/guardar" method="POST" class="form-cuenta" id="formEditarCuenta">
+
+                    <input type="hidden" id="idCuentaBancaria" name="idCuentaBancaria" value="{{idCuentaBancaria}}" />
+
+                    <label for="numeroCuentaBancaria">Número de cuenta:</label>
+                    <div>
+                        <input type="text" id="numeroCuentaBancaria" name="numeroCuentaBancaria"
+                               value="{{numeroCuentaBancaria}}" required />
+                        <span class="msg-error" id="err-numero"></span>
+                    </div>
+
+                    <label for="tipoCuentaBancaria">Tipo de cuenta:</label>
+                    <div>
+                        <select id="tipoCuentaBancaria" name="tipoCuentaBancaria" required>
+                            <option value="">Seleccione un tipo</option>
+                            <option value="ahorros"   {{#if esAhorros}}selected{{/if}}>Ahorros</option>
+                            <option value="corriente" {{#if esCorriente}}selected{{/if}}>Corriente</option>
+                        </select>
+                        <span class="msg-error" id="err-tipo"></span>
+                    </div>
+
+                    <label for="saldoCuentaBancaria">Saldo:</label>
+                    <div>
+                        <input type="number" step="0.01" id="saldoCuentaBancaria" name="saldoCuentaBancaria"
+                               value="{{saldoCuentaBancaria}}" required />
+                        <span class="msg-error" id="err-saldo"></span>
+                    </div>
+
+                    <label for="fechaAperturaCuentaBancaria">Fecha de apertura:</label>
+                    <div>
+                        <input type="date" id="fechaAperturaCuentaBancaria" name="fechaAperturaCuentaBancaria"
+                               value="{{fechaAperturaCuentaBancaria}}" required />
+                        <span class="msg-error" id="err-fecha"></span>
+                    </div>
+
+                    <label for="estadoCuentaBancaria">Estado:</label>
+                    <div>
+                        <select id="estadoCuentaBancaria" name="estadoCuentaBancaria" required>
+                            <option value="">Seleccione un estado</option>
+                            <option value="activa"    {{#if esActiva}}selected{{/if}}>Activa</option>
+                            <option value="inactiva"  {{#if esInactiva}}selected{{/if}}>Inactiva</option>
+                            <option value="bloqueada" {{#if esBloqueada}}selected{{/if}}>Bloqueada</option>
+                        </select>
+                        <span class="msg-error" id="err-estado"></span>
+                    </div>
+
+                    <!-- ✅ Corregido: name="idCliente" para que coincida con el Java -->
+                    <label for="idCliente">Cliente:</label>
+                    <div>
+                        <select id="idCliente" name="idCliente" required>
+                            <option value="">Seleccione un cliente</option>
+                            {{#each listaClientes}}
+                            <option value="{{idCliente}}" {{#if seleccionado}}selected{{/if}}>
+                                {{nombreCliente}}
+                            </option>
+                            {{/each}}
+                        </select>
+                        <span class="msg-error" id="err-cliente"></span>
+                    </div>
+
+                    <button type="submit">Actualizar cuenta</button>
+                </form>
+            </div>
+        </main>
+
+        {{include footer}}
+    </body>
+</html>
