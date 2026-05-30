@@ -28,7 +28,7 @@ public final class CajeroMapeador implements
 
         CajeroDto dto = new CajeroDto(
                 entidad.getIdCajero(),
-                sucursalDto,
+                entidad.getSucursalCajero().getIdSucursal(),
                 entidad.getNombreCajero(),
                 entidad.getTurnoCajero()
         );

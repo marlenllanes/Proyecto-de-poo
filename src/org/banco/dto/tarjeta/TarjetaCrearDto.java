@@ -7,7 +7,9 @@ public record TarjetaCrearDto(
         String tipoTarjeta,
         OffsetDateTime fechaExpedicionTarjeta,
         OffsetDateTime fechaVencimientoTarjeta,
-        String estadoTarjeta
+        String estadoTarjeta,
+        Integer idCliente,
+        Integer idCuentaTarjeta
         ) {
 
 }

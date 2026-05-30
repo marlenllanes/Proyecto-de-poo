@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 
 public record MovimientoCuentaActualizarDto(
         Integer idMovimientoCuenta,
+        Integer idCuenta,
         String tipoMovimientoCuenta,
         BigDecimal valorMovimientoCuenta,
         OffsetDateTime fechaMovimientoCuenta,

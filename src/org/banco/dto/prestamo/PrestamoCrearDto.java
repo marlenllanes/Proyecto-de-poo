@@ -3,7 +3,8 @@ package org.banco.dto.prestamo;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
-public record PrestamoCrearDto(        
+public record PrestamoCrearDto( 
+        Integer cliente,
         BigDecimal montoPrestamo,
         BigDecimal tasaInteresPrestamo,
         OffsetDateTime fechaDesembolsoPrestamo,

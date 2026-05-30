@@ -4,7 +4,8 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record TransaccionCajeroActualizarDto(
-        Integer idTransaccionCajero,        
+        Integer idTransaccionCajero,
+        Integer idCajero,
         String tipoTransaccionCajero,
         BigDecimal valorTransaccionCajero,
         OffsetDateTime fechaTransaccionCajero

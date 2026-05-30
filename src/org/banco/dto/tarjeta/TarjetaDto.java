@@ -1,6 +1,8 @@
 package org.banco.dto.tarjeta;
 
 import java.time.OffsetDateTime;
+import org.banco.dto.cliente.ClienteDto;
+import org.banco.dto.cuentabancaria.CuentaBancariaDto;
 
 public record TarjetaDto(
         Integer idTarjeta,
@@ -8,7 +10,9 @@ public record TarjetaDto(
         String tipoTarjeta,
         OffsetDateTime fechaExpedicionTarjeta,
         OffsetDateTime fechaVencimientoTarjeta,
-        String estadoTarjeta        
+        String estadoTarjeta,
+        ClienteDto cliente,
+        CuentaBancariaDto cuenta
         ) {
 
 }
