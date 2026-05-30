@@ -3,6 +3,10 @@ package org.banco.webconfig;
 import com.cleandev.webserver.ruteo.RegistroRutas;
 import com.cleandev.webserver.ruteo.Router;
 import java.util.Map;
+import org.banco.webconfig.ruta.cliente.RutaClienteAdmin;
+import org.banco.webconfig.ruta.cliente.RutaClienteCrear;
+import org.banco.webconfig.ruta.cliente.RutaClienteEditar;
+import org.banco.webconfig.ruta.cliente.RutaClienteListar;
 
 
 public class Ruteo extends ControladorBancolombia
@@ -28,11 +32,15 @@ public class Ruteo extends ControladorBancolombia
         //new RutaCategoriaCrear().registrar(r);
         //new RutaCategoriaEditar().registrar(r);
         //new RutaCategoriaListar().registrar(r);
+        new RutaClienteAdmin().registrar(r);
+        new RutaClienteCrear().registrar(r);
+        new RutaClienteEditar().registrar(r);
+        new RutaClienteListar().registrar(r);
 
 
         setManejador404(req -> {
             Map<String, Object> modelo = modeloBase();
-            modelo.put("titulo", "Se perdio mi vale");
+            modelo.put("titulo", "Lo siento no se pudo encontrar");
             modelo.put("rutaSolicitada", req.rutaSolicitada());
             return vista("no_encontrada.html", modelo);
         });

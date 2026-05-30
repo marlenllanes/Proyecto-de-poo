@@ -65,59 +65,59 @@ public class EnsambladorWeb {
 
     }
 
-    public static CajeroControlador cajeroControlador() {
+    public static CajeroControlador cajero() {
         return cajeroControlador;
     }
 
-    public static ClienteControlador clienteControlador() {
+    public static ClienteControlador cliente() {
         return clienteControlador;
     }
 
-    public static ClienteProductoSucursalControlador clienteProductoSucursalControlador() {
+    public static ClienteProductoSucursalControlador clienteProductoSucursal() {
         return clienteProductoSucursalControlador;
     }
 
-    public static ConsumoTarjetaControlador consumoTarjetaControlador() {
+    public static ConsumoTarjetaControlador consumoTarjeta() {
         return consumoTarjetaControlador;
     }
 
-    public static CuentaBancariaControlador cuentaBancariaControlador() {
+    public static CuentaBancariaControlador cuentaBancaria() {
         return cuentaBancariaControlador;
     }
 
-    public static CuotaPrestamoControlador cuotaPrestamoControlador() {
+    public static CuotaPrestamoControlador cuotaPrestamo() {
         return cuotaPrestamoControlador;
     }
 
-    public static MovimientoCuentaControlador movimientoCuentaControlador() {
+    public static MovimientoCuentaControlador movimientoCuenta() {
         return movimientoCuentaControlador;
     }
 
-    public static PagoPrestamoControlador pagoPrestamoControlador() {
+    public static PagoPrestamoControlador pagoPrestamo() {
         return pagoPrestamoControlador;
     }
 
-    public static PrestamoControlador prestamoControlador() {
+    public static PrestamoControlador prestamo() {
         return prestamoControlador;
     }
 
-  public static ProductoFinancieroControlador productoFinancieroControlador() {
+  public static ProductoFinancieroControlador productoFinanciero() {
     return productoFinancieroControlador;
 }
 
-    public static SucursalControlador sucursalControlador() {
+    public static SucursalControlador sucursal() {
         return sucursalControlador;
     }
 
-    public static TarjetaControlador tarjetaControlador() {
+    public static TarjetaControlador tarjeta() {
         return tarjetaControlador;
     }
 
-    public static TransaccionCajeroControlador transaccionCajeroControlador() {
+    public static TransaccionCajeroControlador transaccionCajero() {
         return transaccionCajeroControlador;
     }
 
-    public static TransferenciaControlador transferenciaControlador() {
+    public static TransferenciaControlador transferencia() {
         return transferenciaControlador;
     }
 

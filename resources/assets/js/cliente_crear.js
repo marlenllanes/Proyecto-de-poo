@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const correo = document.getElementById("correoCliente");
     const celular = document.getElementById("celularCliente");
     const fecha = document.getElementById("fechaNacimientoCliente");
+    const dire = document.getElementById("direccionCliente");
  
     form.addEventListener("submit", (e) => {
         let valido = true;
@@ -30,6 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
            if (fecha.value.trim() === "") {
             marcarError(fecha, "La fecha del cliente es obligatorio");
+            valido = false;
+        }
+        if (dire.value.trim() === "") {
+            marcarError(nombre, "La direccion del cliente es obligatorio");
             valido = false;
         }
         if (!valido) {
