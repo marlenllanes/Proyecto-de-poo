@@ -1,0 +1,24 @@
+body.layout-pro {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+body.layout-pro > main {
+    flex: 1;
+}
+
+footer.footer-pro {
+    background: var(--bg-card);
+    color: var(--text-secondary);
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+body.layout-pro > main {
+    width: 100%;
+    display: block;
+}

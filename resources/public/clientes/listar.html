@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <title>Listado de clientes</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/cliente_listar.css" />
+                <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/cliente_listar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="tabla-wrapper-pro animated-fadeIn">
+                <h1>{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="tabla-card-pro">
+                    <table class="tabla-pro">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Cliente</th>
+                                 <th>Documento</th>
+                                <th>correo</th>
+                                <th>celular</th>
+                                 <th>fecha nacimiento</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {{#each cliente}}
+                            <tr>
+                               <td>{{idCliente}}</td>
+                                <td>{{nombreCliente}}</td>
+                                <td>{{documentoCliente}}</td>
+                                <td>{{correoCliente}}</td>
+                                <td>{{celularCliente}}</td>
+                                <td>{{fechaNacimientoCliente}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </main>
+
+        {{include footer}}
+    </body>
+</html>

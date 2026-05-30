@@ -1,0 +1,120 @@
+<head>
+    <meta charset="utf-8" />
+    <title>Crear Producto</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/assets/css/estilos.css" />
+    <link rel="stylesheet" href="/assets/css/producto_crear.css" /> 
+    <link rel="stylesheet" href="/assets/css/mensajeria.css" />
+    
+    <!-- SOLUCIÓN: Forzar diseño vertical limpio para los 6 campos del producto -->
+    <style>
+        .form-crear {
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 15px !important;
+        }
+        .form-group {
+            display: flex !important;
+            flex-direction: column !important;
+            width: 100% !important;
+            align-items: flex-start !important;
+        }
+        .form-group input, .form-group select {
+            width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 10px !important;
+            margin-top: 5px !important;
+        }
+    </style>
+
+    <script src="/assets/js/navegacion.js" defer></script>
+    <script src="/assets/js/theme-switch.js" defer></script>
+     <script src="/assets/js/producto_crear.js" defer></script>
+</head>
+
+    <body class="layout-pro">
+        {{include header}}
+        
+        <main class="main-content-pro container">
+            <div class="tabla-wrapper-pro animated-fadeIn">
+                <h1 class="titulo-producto">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                <!-- Tarjeta contenedora blanca -->
+                <div class="tabla-card-pro" style="padding: 30px;">
+                    
+                    <!-- Tu action debe apuntar a la ruta POST del controlador -->
+                    <form action="/producto/crear" method="POST" class="form-crear">
+                        
+                        <div class="form-group">
+                            <label for="nombreProducto">Nombre del producto:</label>
+                            <input type="text" id="nombreProducto" name="nombreProducto" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoriaProducto">Categoría:</label>
+                            <select id="categoriaProducto" name="categoriaProducto" required>
+                              <option value="">Seleccione una categoría</option>
+        
+                             <!-- Recorremos la lista enviada por el Backend -->
+                             {{#each listaCategorias}}
+                             <!-- value guarda el ID numérico y el texto muestra el nombre -->
+                             <option value="{{idCategoria}}">{{nombreCategoria}}</option>
+                             {{/each}}
+        
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="proveedorProducto">Proveedor:</label>
+                            <select id="proveedorProducto" name="proveedorProducto" required>
+                              <option value="">Seleccione un proveedor</option>
+        
+                              <!-- Recorremos la lista de proveedores -->
+                             {{#each listaProveedores}}
+                              <!-- Ajusta "idProveedor" y "nombreProveedor" según se llamen en tu ProveedorDto -->
+                              <option value="{{idProveedor}}">{{nombreProveedor}}</option>
+                             {{/each}}
+        
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="precioProducto">Precio:</label>
+                            <input type="number" step="0.01" id="precioProducto" name="precioProducto" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="costoProducto">Costo:</label>
+                            <input type="number" step="0.01" id="costoProducto" name="costoProducto" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cantidadProducto">Cantidad (Stock):</label>
+                            <input type="number" id="cantidadProducto" name="cantidadProducto" required />
+                        </div>
+
+                        <!-- Botón centrado o estilizado con la clase del profesor -->
+                        <button type="submit" class="btn-guardar" style="width: 100%; margin-top: 20px;">Guardar</button>
+                    </form>
+
+                </div>
+            </div>
+        </main>
+
+        {{include footer}}
+    </body>
+</html>

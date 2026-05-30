@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/formaPago_editar.css">
+        
+
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/formaPago_editar.js" defer></script>
+    </head>
+
+    <body>
+
+        {{include header}}
+
+        <main class="main-content-pro container">
+            <div class="editar-wrapper animated-fadeIn">
+                <h1 class="titulo-formaPago">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                <form class="form-editar" action="/formitaPago/edit" method="POST">
+                    <input type="hidden" id="idFormaPago" name="idFormaPago" value="{{idFormaPago}}" />
+                    <label for="nombreFormaPago">Nombre de la forma de pago:</label>
+                    <input type="text" id="nombreFormaPago" name="nombreFormaPago" value="{{nombreFormaPago}}" />
+                    <button type="submit">Actualizar</button>
+                </form>
+            </div>
+        </main>
+
+    </body>
+</html>

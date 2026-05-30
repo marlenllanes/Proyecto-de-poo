@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/venta_editar.js" defer></script>
+        <style>
+            .venta-wrapper {
+                max-width: 560px;
+                margin: 48px auto;
+                padding: 0 16px;
+            }
+            .venta-titulo {
+                font-size: 24px;
+                font-weight: 700;
+                color: var(--text-primary);
+                margin-bottom: 28px;
+                padding-bottom: 12px;
+                display: inline-block;
+            }
+            .venta-card {
+                background-color: var(--bg-card);
+                border: 1px solid var(--border-color);
+                border-radius: 14px;
+                padding: 40px 36px;
+                box-shadow: var(--shadow-card);
+            }
+            .venta-id-badge {
+                display: inline-block;
+                background-color: var(--bg-input);
+                border: 1px solid var(--border-color);
+                border-radius: 20px;
+                padding: 4px 14px;
+                font-size: 13px;
+                color: var(--text-secondary);
+                margin-bottom: 24px;
+            }
+            .venta-id-badge span {
+                font-weight: 700;
+                color: var(--vibrant-color);
+            }
+            .campo-grupo {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                margin-bottom: 20px;
+            }
+            .campo-grupo label {
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--text-secondary);
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+            .campo-grupo input,
+            .campo-grupo select {
+                padding: 11px 14px;
+                background-color: var(--bg-input);
+                border: 1px solid var(--border-color);
+                border-radius: 8px;
+                color: var(--input-text-color);
+                font-size: 15px;
+                transition: border-color 0.2s, box-shadow 0.2s;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            .campo-grupo input:focus,
+            .campo-grupo select:focus {
+                border-color: var(--vibrant-color);
+                box-shadow: 0 0 0 3px rgba(0, 162, 255, 0.15);
+                outline: none;
+            }
+            .campos-dobles {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .btn-actualizar {
+                width: 100%;
+                margin-top: 8px;
+                padding: 14px;
+                background-color: var(--vibrant-color);
+                color: #000;
+                font-size: 15px;
+                font-weight: 700;
+                border: none;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: filter 0.2s, transform 0.1s;
+            }
+            .btn-actualizar:hover { filter: brightness(1.1); }
+            .btn-actualizar:active { transform: scale(0.98); }
+            @media (max-width: 520px) {
+                .venta-card { padding: 24px 18px; }
+                .campos-dobles { grid-template-columns: 1fr; }
+            }
+        </style>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="venta-wrapper animated-fadeIn">
+
+                <h1 class="venta-titulo">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="venta-card">
+                    <div class="venta-id-badge">Venta # <span>{{idVenta}}</span></div>
+
+                    <form id="formEditarVenta" action="/laVenta/edit" method="POST">
+                        <input type="hidden" id="idVenta" name="idVenta" value="{{idVenta}}" />
+
+                        <div class="campo-grupo">
+                            <label for="clienteVenta">Cliente</label>
+                            <select id="clienteVenta" name="clienteVenta" required>
+                                <option value="">Seleccione un cliente</option>
+                                {{#each listaClientes}}
+                                <option value="{{idCliente}}">{{nombreCliente}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="fechaVenta">Fecha de la venta</label>
+                            <input type="text"
+                                   id="fechaVenta"
+                                   name="fechaVenta"
+                                   value="{{fechaVenta}}"
+                                   required />
+                        </div>
+
+                        <div class="campos-dobles">
+                            <div class="campo-grupo">
+                                <label for="totalVenta">Total venta</label>
+                                <input type="number" step="0.01"
+                                       id="totalVenta" name="totalVenta"
+                                       value="{{totalVenta}}" required />
+                            </div>
+                            <div class="campo-grupo">
+                                <label for="ivaVenta">IVA</label>
+                                <input type="number" step="0.01"
+                                       id="ivaVenta" name="ivaVenta"
+                                       value="{{ivaVenta}}" required />
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-actualizar">Actualizar venta</button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>

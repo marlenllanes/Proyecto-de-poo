@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+
+        <title>{{titulo}}</title>
+
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/acerca_de.css" />
+
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+    </head>
+    <body>
+        {{include header}}
+        <main class="main-content-pro container">
+            <h1 class="titulo-acerca-de">{{titulo}}</h1>
+            <section class="testimonial-card">
+                <!-- Texto + ícono -->
+                <div class="testimonial-text">
+                    <blockquote>
+                        La Programación Orientada a Objetos es la base para crear 
+                        sistemas rápidos, eficientes y escalables, apoyándose en una 
+                        arquitectura ordenada y con código limpio.
+                    </blockquote>
+                    <img src="/assets/icon/quote.svg" alt="Comillas" class="quote-icon">
+                    <div class="author">Andrés Guerrero Alarcón</div>
+                    <div class="role">Uno de los Profes de POO</div>
+                </div>
+
+                <!-- Foto -->
+                <img src="/assets/img/acercade.jpg" alt="Andrew Garfield" class="testimonial-photo">
+            </section>
+        </main>
+
+        {{include footer}}
+    </body>
+</html>

@@ -1,0 +1,102 @@
+/* === Contenedor general === */
+.tabla-wrapper-pro {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tabla-wrapper-pro h1 {
+    margin-bottom: 20px;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* === Tarjeta que envuelve la tabla === */
+.tabla-card-pro {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-card);
+    padding: 20px;
+    overflow-x: auto;
+}
+
+/* === Tabla === */
+.tabla-pro {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 15px;
+    color: var(--text-primary);
+}
+
+.tabla-pro thead {
+    background-color: var(--bg-input);
+}
+
+.tabla-pro th {
+    text-align: left;
+    padding: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.tabla-pro td {
+    padding: 6px 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* === Anchos de columnas con porcentajes === */
+.tabla-pro th:nth-child(1),
+.tabla-pro td:nth-child(1) {
+    width: 15%;
+}
+
+.tabla-pro th:nth-child(2),
+.tabla-pro td:nth-child(2) {
+    width: 50%;
+}
+
+
+/* Alternancia de filas */
+.tabla-pro tr:nth-child(even) {
+    background-color: var(--dropdown-bg);
+}
+
+/* Hover */
+.tabla-pro tbody tr:hover {
+    background-color: var(--dropdown-hover-bg);
+    transition: var(--transition-fast);
+}
+/* === Botones === */
+/* === Botones con iconos (versión PRO) === */
+.btn-pro {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.btn-pro img {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    max-width: 18px;
+    max-height: 18px;
+    object-fit: contain;
+    display: block;
+    flex-shrink: 0;
+}
+
+.btn-pro svg {
+    width: 18px;
+    height: 18px;
+}

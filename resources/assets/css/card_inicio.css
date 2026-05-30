@@ -1,0 +1,55 @@
+.titulo-inicio {
+    max-width: 900px;
+    padding-left: 20px;
+    margin: 20px auto 10px auto;
+}
+
+/* Contenedor general de las cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    padding: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Cada card individual */
+.card {
+    display: flex;
+    align-items: flex-start;
+    background-color: #ffffff;
+    border: 1px solid #cce7f0;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    transition: box-shadow 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    background-color: #f0f0f0;
+}
+
+/* Ícono SVG */
+.card img.icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 16px;
+    flex-shrink: 0;
+    filter: invert(18%) sepia(80%) saturate(600%) hue-rotate(190deg); /* azul Lucide */
+}
+
+/* Contenido textual */
+.card-content h3 {
+    margin-bottom: 6px;
+    font-size: 18px;
+    color: #003366;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.4;
+}

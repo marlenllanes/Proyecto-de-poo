@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+    <head>
+        <meta charset="utf-8">
+        <title>Recurso no encontrado</title>
+
+        <link rel="icon" type="image/x-icon" href="/favicon.ico">
+        <link rel="stylesheet" href="/assets/css/estilos.css">
+        <link rel="stylesheet" href="/assets/css/not_found.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <h1 class="titulo-not-found">{{titulo}}</h1>
+            <section class="not-found">
+                <div class="not-found-card">
+                    <img src="/assets/img/not_found.png" alt="Recurso no encontrado">
+                    <p>Lo sentimos, el recurso solicitado 
+                        <strong>{{rutaSolicitada}}</strong> no existe.</p>
+                    <a href="/">Volver al inicio</a>
+                </div>
+            </section>
+
+        </main>
+
+        {{include footer}}
+    </body>
+</html>
