@@ -31,10 +31,14 @@ import org.banco.webconfig.ruta.tarjeta.RutaTarjetaAdmin;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaCrear;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaEditar;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaListar;
-import org.banco.webconfig.ruta.transferencia.RutaTransferenciaAdmin;
-import org.banco.webconfig.ruta.transferencia.RutaTransferenciaCrear;
-import org.banco.webconfig.ruta.transferencia.RutaTransferenciaEditar;
-import org.banco.webconfig.ruta.transferencia.RutaTransferenciaListar;
+import org.banco.webconfig.ruta.transaccioncajero.RutaTransaccionCajeroAdmin;
+import org.banco.webconfig.ruta.transaccioncajero.RutaTransaccionCajeroCrear;
+import org.banco.webconfig.ruta.transaccioncajero.RutaTransaccionCajeroEditar;
+import org.banco.webconfig.ruta.transaccioncajero.RutaTransaccionCajeroListar;
+import org.banco.webconfig.ruta.transferencias.RutaTransferenciaAdmin;
+import org.banco.webconfig.ruta.transferencias.RutaTransferenciaCrear;
+import org.banco.webconfig.ruta.transferencias.RutaTransferenciaEditar;
+import org.banco.webconfig.ruta.transferencias.RutaTransferenciaListar;
 
 public class Ruteo extends ControladorBancolombia
         implements RegistroRutas {
@@ -90,6 +94,11 @@ public class Ruteo extends ControladorBancolombia
         new RutaSucursalEditar().registrar(r);
         new RutaSucursalListar().registrar(r);
 
+        new RutaTransaccionCajeroAdmin().registrar(r);
+        new RutaTransaccionCajeroCrear().registrar(r);
+        new RutaTransaccionCajeroEditar().registrar(r);
+        new RutaTransaccionCajeroListar().registrar(r);
+        
         new RutaTransferenciaAdmin().registrar(r);
         new RutaTransferenciaCrear().registrar(r);
         new RutaTransferenciaEditar().registrar(r);

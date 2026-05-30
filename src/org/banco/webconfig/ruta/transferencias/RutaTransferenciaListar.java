@@ -1,4 +1,4 @@
-package org.banco.webconfig.ruta.transferencia;
+package org.banco.webconfig.ruta.transferencias;
 
 import com.cleandev.webserver.ruteo.Router;
 import java.util.Map;

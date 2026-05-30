@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/transaccioncajero_editar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/transaccioncajero_editar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="transaccion-wrapper animated-fadeIn">
+                <h1 class="transaccion-titulo">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="transaccion-card">
+                    <div class="transaccion-id-badge">Transacción # <span>{{idTransaccionCajero}}</span></div>
+                    <form id="formEditarTransaccion" action="/transacciones/editar/guardar" method="POST">
+
+                        <input type="hidden" name="idTransaccionCajero" value="{{idTransaccionCajero}}" />
+
+                        <div class="campo-grupo">
+                            <label for="idCajero">Cajero</label>
+                            <select id="idCajero" name="idCajero" required>
+                                <option value="">Seleccione un cajero</option>
+                                {{#each cajeros}}
+                                <option value="{{idCajero}}" {{#if (eq idCajero ../idCajero)}}selected{{/if}}>{{nombreCajero}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="idCuenta">Cuenta</label>
+                            <select id="idCuenta" name="idCuenta" required>
+                                <option value="">Seleccione una cuenta</option>
+                                {{#each cuentas}}
+                                <option value="{{idCuentaBancaria}}" {{#if (eq idCuentaBancaria ../idCuenta)}}selected{{/if}}>{{numeroCuentaBancaria}} - {{cliente.nombreCliente}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="tipoTransaccionCajero">Tipo de Transacción</label>
+                            <select id="tipoTransaccionCajero" name="tipoTransaccionCajero" required>
+                                <option value="">Seleccione un tipo</option>
+                                <option value="CONSIGNACION" {{#if (eq tipoTransaccionCajero "CONSIGNACION")}}selected{{/if}}>Consignación</option>
+                                <option value="RETIRO" {{#if (eq tipoTransaccionCajero "RETIRO")}}selected{{/if}}>Retiro</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="valorTransaccionCajero">Valor</label>
+                            <input type="number" id="valorTransaccionCajero" name="valorTransaccionCajero" value="{{valorTransaccionCajero}}" min="1" step="0.01" required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="fechaTransaccionCajero">Fecha</label>
+                            <input type="datetime-local" id="fechaTransaccionCajero" name="fechaTransaccionCajero" value="{{fechaTransaccionCajero}}" required />
+                        </div>
+
+                        <button type="submit" class="btn-actualizar">Actualizar transacción</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>
