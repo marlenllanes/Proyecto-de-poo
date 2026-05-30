@@ -719,3 +719,58 @@ html[data-theme="light"] .user-avatar {
 html[data-theme="light"] .dropdown-toggle .arrow {
     color: #333;
 }
+@media (max-width: 1500px) {
+    :root {
+        --nav-gap: 1px;
+        --nav-padding: 5px 6px;
+    }
+    .nav-link {
+        font-size: 12px;
+    }
+    .user-name {
+        display: none;
+    }
+}
+
+@media (max-width: 1300px) {
+    :root {
+        --nav-gap: 0px;
+        --nav-padding: 4px 5px;
+    }
+    .nav-link {
+        font-size: 11px;
+    }
+    .logo-text {
+        font-size: 18px;
+    }
+    .user-name {
+        display: none;
+    }
+    .user-avatar {
+        width: 28px;
+        height: 28px;
+    }
+}
+
+@media (max-width: 1100px) {
+    :root {
+        --nav-gap: 0px;
+        --nav-padding: 3px 4px;
+    }
+    .nav-link {
+        font-size: 10px;
+    }
+    .logo-text {
+        font-size: 16px;
+    }
+    .logo-area img {
+        width: 28px;
+    }
+    .user-name {
+        display: none;
+    }
+    .theme-switch {
+        width: 36px;
+        height: 18px;
+    }
+}
