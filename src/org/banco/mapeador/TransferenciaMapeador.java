@@ -6,29 +6,14 @@ import org.banco.dto.transferencia.TransferenciaActualizarDto;
 import org.banco.dto.transferencia.TransferenciaCrearDto;
 import org.banco.dto.transferencia.TransferenciaDto;
 import org.banco.entidad.Transferencia;
-import org.banco.mapeador.api.ApiMapeador;
+import org.banco.mapeador.api.ApiMapeadorCompuesto;
 
 public final class TransferenciaMapeador implements
-        ApiMapeador<Transferencia, TransferenciaCrearDto, TransferenciaDto, TransferenciaActualizarDto> {
+        ApiMapeadorCompuesto<Transferencia, TransferenciaCrearDto, TransferenciaActualizarDto> {
 
     public static final TransferenciaMapeador SINGLETON = new TransferenciaMapeador();
 
     private TransferenciaMapeador() {
-    }
-
-    @Override
-    public TransferenciaDto toDto(Transferencia entidad) {
-        if (entidad == null) {
-            return null;
-        }
-        return new TransferenciaDto(
-                entidad.getIdTransferencia(),
-                CuentaBancariaMapeador.SINGLETON.toDto(entidad.getIdTransferenciaPk().getCuentaOrigen()),
-                CuentaBancariaMapeador.SINGLETON.toDto(entidad.getIdTransferenciaPk().getCuentaDestino()),
-                entidad.getFechaTransferencia(),
-                entidad.getValorTransferencia(),
-                entidad.getDescripcionTransferencia()
-        );
     }
 
     @Override
@@ -51,11 +36,7 @@ public final class TransferenciaMapeador implements
         if (dto == null) {
             return null;
         }
-        Transferencia entidad = new Transferencia(
-                dto.idCuentaOrigen(),
-                dto.idCuentaDestino()
-        );
-        entidad.setIdTransferencia(dto.idTransferencia());
+        Transferencia entidad = new Transferencia(null, null);
         entidad.setFechaTransferencia(dto.fechaTransferencia());
         entidad.setValorTransferencia(dto.valorTransferencia());
         entidad.setDescripcionTransferencia(dto.descripcionTransferencia());
@@ -63,6 +44,47 @@ public final class TransferenciaMapeador implements
     }
 
     @Override
+    public TransferenciaCrearDto toCrearDto(Transferencia entidad) {
+        if (entidad == null) {
+            return null;
+        }
+        return new TransferenciaCrearDto(
+                entidad.getIdTransferenciaPk().getCuentaOrigen().getIdCuentaBancaria(),
+                entidad.getIdTransferenciaPk().getCuentaDestino().getIdCuentaBancaria(),
+                entidad.getFechaTransferencia(),
+                entidad.getValorTransferencia(),
+                entidad.getDescripcionTransferencia()
+        );
+    }
+
+    @Override
+    public TransferenciaActualizarDto toActualizarDto(Transferencia entidad) {
+        if (entidad == null) {
+            return null;
+        }
+        return new TransferenciaActualizarDto(
+                entidad.getIdTransferencia(), 
+                entidad.getIdTransferenciaPk().getCuentaOrigen().getIdCuentaBancaria(),
+                entidad.getIdTransferenciaPk().getCuentaDestino().getIdCuentaBancaria(), 
+                entidad.getFechaTransferencia(), 
+                entidad.getValorTransferencia(), 
+                entidad.getDescripcionTransferencia());
+    }
+
+    public TransferenciaDto toDto(Transferencia entidad) {
+        if (entidad == null) {
+            return null;
+        }
+        return new TransferenciaDto(
+                entidad.getIdTransferencia(),
+                CuentaBancariaMapeador.SINGLETON.toDto(entidad.getIdTransferenciaPk().getCuentaOrigen()),
+                CuentaBancariaMapeador.SINGLETON.toDto(entidad.getIdTransferenciaPk().getCuentaDestino()),
+                entidad.getFechaTransferencia(),
+                entidad.getValorTransferencia(),
+                entidad.getDescripcionTransferencia()
+        );
+    }
+
     public List<TransferenciaDto> toDtoList(List<Transferencia> entidades) {
         List<TransferenciaDto> arreglo = new ArrayList<>();
         if (entidades == null) {
