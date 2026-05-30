@@ -2,6 +2,7 @@ package org.banco.dto.cuentabancaria;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import org.banco.dto.cliente.ClienteDto;
 
 public record CuentaBancariaDto(
         Integer idCuentaBancaria,
@@ -10,7 +11,7 @@ public record CuentaBancariaDto(
         BigDecimal saldoCuentaBancaria,
         OffsetDateTime fechaAperturaCuentaBancaria,
         String estadoCuentaBancaria,
-        Integer idClienteCuenta
+        ClienteDto cliente
         ) {
 
 }
