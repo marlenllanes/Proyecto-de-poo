@@ -5,7 +5,7 @@ import com.cleandev.webserver.ruteo.Router;
 import java.util.Map;
 
 
-public class Ruteo extends ControladorBancolmbia
+public class Ruteo extends ControladorBancolombia
         implements RegistroRutas {
 
     private void registrarPaginasPrincipales(Router r) {

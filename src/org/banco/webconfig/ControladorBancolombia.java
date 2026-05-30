@@ -5,7 +5,7 @@ import com.cleandev.webserver.servidor.Peticion;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ControladorBancolmbia extends RutaControlador{
+public abstract class ControladorBancolombia extends RutaControlador{
 
     protected Map<String, Object> modeloBase() {
         Map<String, Object> miModelo = new HashMap<>();
