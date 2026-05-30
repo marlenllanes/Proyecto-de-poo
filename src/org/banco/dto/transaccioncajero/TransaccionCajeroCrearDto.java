@@ -5,6 +5,7 @@ import java.time.OffsetDateTime;
 
 public record TransaccionCajeroCrearDto(  
         Integer idCajero,
+        Integer idCuenta,
         String tipoTransaccionCajero,
         BigDecimal valorTransaccionCajero,
         OffsetDateTime fechaTransaccionCajero

@@ -6,6 +6,7 @@ import java.time.OffsetDateTime;
 public record TransaccionCajeroActualizarDto(
         Integer idTransaccionCajero,
         Integer idCajero,
+        Integer idCuenta,
         String tipoTransaccionCajero,
         BigDecimal valorTransaccionCajero,
         OffsetDateTime fechaTransaccionCajero

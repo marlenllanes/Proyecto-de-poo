@@ -5,7 +5,6 @@ import java.util.List;
 import org.banco.dto.cajero.CajeroActualizarDto;
 import org.banco.dto.cajero.CajeroCrearDto;
 import org.banco.dto.cajero.CajeroDto;
-import org.banco.dto.sucursal.SucursalDto;
 import org.banco.entidad.Cajero;
 import org.banco.mapeador.api.ApiMapeador;
 
@@ -18,22 +17,18 @@ public final class CajeroMapeador implements
 
     }
 
-    @Override
-    public CajeroDto toDto(Cajero entidad) {
-        if (entidad == null) {
-            return null;
-        }
-
-        SucursalDto sucursalDto = SucursalMapeador.SINGLETON.toDto(entidad.getSucursalCajero());
-
-        CajeroDto dto = new CajeroDto(
-                entidad.getIdCajero(),
-                entidad.getSucursalCajero().getIdSucursal(),
-                entidad.getNombreCajero(),
-                entidad.getTurnoCajero()
-        );
-        return dto;
+  @Override
+public CajeroDto toDto(Cajero entidad) {
+    if (entidad == null) {
+        return null;
     }
+    return new CajeroDto(
+            entidad.getIdCajero(),
+            entidad.getSucursalCajero().getIdSucursal(),
+            entidad.getNombreCajero(),
+            entidad.getTurnoCajero()
+    );
+}
 
     @Override
     public Cajero toEntityFromCrear(CajeroCrearDto dto) {
