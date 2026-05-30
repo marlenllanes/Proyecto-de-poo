@@ -10,7 +10,7 @@ public record TarjetaActualizarDto(
         OffsetDateTime fechaVencimientoTarjeta,
         String estadoTarjeta,
         Integer idCliente,
-        Integer idCuentaTarjeta
+        Integer idCuenta
         ) {
 
 }

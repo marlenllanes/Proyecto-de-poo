@@ -10,7 +10,7 @@ public record CuentaBancariaActualizarDto(
         BigDecimal saldoCuentaBancaria,
         OffsetDateTime fechaAperturaCuentaBancaria,
         String estadoCuentaBancaria,
-        Integer idClienteCuenta
+        Integer idCliente
         ) {
 
 }

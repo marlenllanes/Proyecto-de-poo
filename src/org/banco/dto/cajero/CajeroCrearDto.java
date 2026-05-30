@@ -1,7 +1,7 @@
 package org.banco.dto.cajero;
 
 public record CajeroCrearDto(        
-        Integer idSucursalCajero,
+        Integer idSucursal,
         String nombreCajero,
         String turnoCajero
 ) {

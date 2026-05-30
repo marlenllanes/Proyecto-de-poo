@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record PrestamoCrearDto( 
-        Integer cliente,
+        Integer idCliente,
         BigDecimal montoPrestamo,
         BigDecimal tasaInteresPrestamo,
         OffsetDateTime fechaDesembolsoPrestamo,

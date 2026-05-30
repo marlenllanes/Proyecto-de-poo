@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 public record ConsumoTarjetaCrearDto(
-        Integer idTarjetaConsumo,
+        Integer idTarjeta,
         OffsetDateTime fechaConsumoTarjeta,
         String establecimientoConsumoTarjeta,
         BigDecimal valorConsumoTarjeta,

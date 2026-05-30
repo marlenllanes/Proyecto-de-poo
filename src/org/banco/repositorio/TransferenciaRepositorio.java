@@ -1,8 +1,8 @@
 package org.banco.repositorio;
 
-import com.cleandev.tpa.PlainText;
+import com.cleandev.tpa.PlainTextJoin;
 import org.banco.entidad.Transferencia;
 
-public interface TransferenciaRepositorio extends PlainText<Transferencia> {
-
+public interface TransferenciaRepositorio
+        extends PlainTextJoin<Transferencia> {
 }

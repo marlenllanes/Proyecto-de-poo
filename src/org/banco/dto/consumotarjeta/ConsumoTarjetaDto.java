@@ -6,7 +6,7 @@ import org.banco.dto.tarjeta.TarjetaDto;
 
 public record ConsumoTarjetaDto(
         Integer idConsumoTarjeta,
-        TarjetaDto tarjetaConsumo,        
+        TarjetaDto tarjeta,        
         OffsetDateTime fechaConsumoTarjeta,
         String establecimientoConsumoTarjeta,
         BigDecimal valorConsumoTarjeta,

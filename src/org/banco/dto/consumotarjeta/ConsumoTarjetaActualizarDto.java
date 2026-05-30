@@ -5,7 +5,7 @@ import java.time.OffsetDateTime;
 
 public record ConsumoTarjetaActualizarDto(
         Integer idConsumoTarjeta,
-        Integer idTarjetaConsumo,
+        Integer idTarjeta,
         OffsetDateTime fechaConsumoTarjeta,
         String establecimientoConsumoTarjeta,
         BigDecimal valorConsumoTarjeta,

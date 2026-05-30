@@ -6,7 +6,7 @@ import org.banco.dto.productofinanciero.ProductoFinancieroCrearDto;
 import org.banco.dto.productofinanciero.ProductoFinancieroDto;
 import org.banco.entidad.ProductoFinanciero;
 import org.banco.mapeador.ProductoFinancieroMapeador;
-import org.banco.recurso.api.ApiOperacionServicio;
+import org.banco.servicio.api.ApiOperacionServicio;
 import org.banco.repositorio.ProductoFinacieroRepositorio;
 
 public class ProductoFinancieroServicio implements ApiOperacionServicio

@@ -7,7 +7,7 @@ import org.banco.dto.cliente.ClienteCrearDto;
 import org.banco.dto.cliente.ClienteDto;
 import org.banco.entidad.Cliente;
 import org.banco.mapeador.ClienteMapeador;
-import org.banco.recurso.api.ApiOperacionServicio;
+import org.banco.servicio.api.ApiOperacionServicio;
 import org.banco.recurso.utilidad.ValidadorCorreo;
 import org.banco.repositorio.ClienteRepositorio;
 

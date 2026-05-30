@@ -5,7 +5,7 @@ import java.time.OffsetDateTime;
 
 public record PrestamoActualizarDto(
         Integer idPrestamo,
-        Integer cliente,
+        Integer idCliente,
         BigDecimal montoPrestamo,
         BigDecimal tasaInteresPrestamo,
         OffsetDateTime fechaDesembolsoPrestamo,
