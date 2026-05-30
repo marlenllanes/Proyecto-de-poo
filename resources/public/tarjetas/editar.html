@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/tarjeta_editar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/tarjeta_editar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="tarjeta-wrapper animated-fadeIn">
+                <h1 class="tarjeta-titulo">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="tarjeta-card">
+                    <div class="tarjeta-id-badge">Tarjeta # <span>{{idTarjeta}}</span></div>
+                    <form id="formEditarTarjeta" action="/tarjetas/editar/guardar" method="POST">
+
+                        <input type="hidden" name="idTarjeta" value="{{idTarjeta}}" />
+
+                        <div class="campo-grupo">
+                            <label for="numeroTarjeta">Número de Tarjeta</label>
+                            <input type="text" id="numeroTarjeta" name="numeroTarjeta" value="{{numeroTarjeta}}" required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="tipoTarjeta">Tipo de Tarjeta</label>
+                            <select id="tipoTarjeta" name="tipoTarjeta" required>
+                                <option value="">Seleccione un tipo</option>
+                                <option value="DEBITO" {{#if (eq tipoTarjeta "DEBITO")}}selected{{/if}}>Débito</option>
+                                <option value="CREDITO" {{#if (eq tipoTarjeta "CREDITO")}}selected{{/if}}>Crédito</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="fechaExpedicionTarjeta">Fecha de Expedición</label>
+                            <input type="datetime-local" id="fechaExpedicionTarjeta" name="fechaExpedicionTarjeta" value="{{fechaExpedicionTarjeta}}" required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="fechaVencimientoTarjeta">Fecha de Vencimiento</label>
+                            <input type="datetime-local" id="fechaVencimientoTarjeta" name="fechaVencimientoTarjeta" value="{{fechaVencimientoTarjeta}}" required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="estadoTarjeta">Estado</label>
+                            <select id="estadoTarjeta" name="estadoTarjeta" required>
+                                <option value="">Seleccione un estado</option>
+                                <option value="ACTIVA" {{#if (eq estadoTarjeta "ACTIVA")}}selected{{/if}}>Activa</option>
+                                <option value="INACTIVA" {{#if (eq estadoTarjeta "INACTIVA")}}selected{{/if}}>Inactiva</option>
+                                <option value="BLOQUEADA" {{#if (eq estadoTarjeta "BLOQUEADA")}}selected{{/if}}>Bloqueada</option>
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="idCliente">Cliente</label>
+                            <select id="idCliente" name="idCliente" required>
+                                <option value="">Seleccione un cliente</option>
+                                {{#each clientes}}
+                                <option value="{{idCliente}}" {{#if (eq idCliente ../idCliente)}}selected{{/if}}>{{nombreCliente}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="idCuenta">Cuenta</label>
+                            <select id="idCuenta" name="idCuenta" required>
+                                <option value="">Seleccione una cuenta</option>
+                                {{#each cuentas}}
+                                <option value="{{idCuentaBancaria}}" {{#if (eq idCuentaBancaria ../idCuenta)}}selected{{/if}}>{{numeroCuentaBancaria}} - {{cliente.nombreCliente}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-actualizar">Actualizar tarjeta</button>
+                    </form>
+                </div>
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>
