@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/tarjeta_listar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/tarjeta_listar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="tabla-wrapper-pro animated-fadeIn">
+                <h1>{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="tabla-card-pro">
+                    <table class="tabla-pro">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Número</th>
+                                <th>Tipo</th>
+                                <th>Estado</th>
+                                <th>Cliente</th>
+                                <th>Cuenta</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each listaTarjetas}}
+                            <tr>
+                                <td>{{idTarjeta}}</td>
+                                <td>{{numeroTarjeta}}</td>
+                                <td>{{tipoTarjeta}}</td>
+                                <td>{{estadoTarjeta}}</td>
+                                <td>{{cliente.nombreCliente}}</td>
+                                <td>{{cuenta.numeroCuentaBancaria}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>
