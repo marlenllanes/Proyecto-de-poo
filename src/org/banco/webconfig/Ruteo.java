@@ -3,10 +3,18 @@ package org.banco.webconfig;
 import com.cleandev.webserver.ruteo.RegistroRutas;
 import com.cleandev.webserver.ruteo.Router;
 import java.util.Map;
+import org.banco.webconfig.ruta.cajero.RutaCajeroAdmin;
+import org.banco.webconfig.ruta.cajero.RutaCajeroCrear;
+import org.banco.webconfig.ruta.cajero.RutaCajeroEditar;
+import org.banco.webconfig.ruta.cajero.RutaCajeroListar;
 import org.banco.webconfig.ruta.cliente.RutaClienteAdmin;
 import org.banco.webconfig.ruta.cliente.RutaClienteCrear;
 import org.banco.webconfig.ruta.cliente.RutaClienteEditar;
 import org.banco.webconfig.ruta.cliente.RutaClienteListar;
+import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaAdmin;
+import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaCrear;
+import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaEditar;
+import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaListar;
 
 
 public class Ruteo extends ControladorBancolombia
@@ -28,14 +36,21 @@ public class Ruteo extends ControladorBancolombia
         registrarPaginasPrincipales(r);
         registrarArchivosEstaticos(r);
 
-       // new RutaCategoriaAdmin().registrar(r);
-        //new RutaCategoriaCrear().registrar(r);
-        //new RutaCategoriaEditar().registrar(r);
-        //new RutaCategoriaListar().registrar(r);
         new RutaClienteAdmin().registrar(r);
         new RutaClienteCrear().registrar(r);
         new RutaClienteEditar().registrar(r);
         new RutaClienteListar().registrar(r);
+        
+        new RutaCajeroAdmin().registrar(r);
+        new RutaCajeroCrear().registrar(r);
+        new RutaCajeroEditar().registrar(r);
+        new RutaCajeroListar().registrar(r);
+                
+        new RutaConsumoTarjetaAdmin().registrar(r);
+        new RutaConsumoTarjetaCrear().registrar(r);
+        new  RutaConsumoTarjetaEditar().registrar(r);
+        new RutaConsumoTarjetaListar().registrar(r);
+                
 
 
         setManejador404(req -> {
