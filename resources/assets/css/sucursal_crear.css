@@ -1,91 +1,77 @@
-/* === Crear sucursal (estilos específicos) === */
-
-.crear-wrapper {
-    max-width: 700px;
-    margin: 30px auto;
+.sucursal-wrapper {
+    max-width: 560px;
+    margin: 48px auto;
+    padding: 0 16px;
 }
-
-.titulo-sucursal {
-    text-align: left;
-    margin-bottom: 20px;
-    font-size: 26px;
-    font-weight: 600;
+.sucursal-titulo {
+    font-size: 24px;
+    font-weight: 700;
     color: var(--text-primary);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    display: inline-block;
 }
-
-.form-crear {
+.sucursal-card {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 32px;
+    border-radius: 14px;
+    padding: 40px 36px;
     box-shadow: var(--shadow-card);
-    display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 18px 20px;
-    align-items: center;
 }
-
-.form-crear label {
-    font-size: 14px;
-    font-weight: 500;
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+.campo-grupo label {
+    font-size: 13px;
+    font-weight: 600;
     color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-
-.form-crear input[type="text"],
-.form-crear select {
-    padding: 12px;
+.campo-grupo input,
+.campo-grupo select {
+    padding: 11px 14px;
     background-color: var(--bg-input);
     border: 1px solid var(--border-color);
-    border-radius: 6px;
+    border-radius: 8px;
     color: var(--input-text-color);
     font-size: 15px;
-    transition: border-color var(--transition-fast);
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
 }
-
-.form-crear input:focus,
-.form-crear select:focus {
+.campo-grupo input:focus,
+.campo-grupo select:focus {
     border-color: var(--vibrant-color);
-    box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
+    box-shadow: 0 0 0 3px rgba(0, 162, 255, 0.15);
     outline: none;
 }
-
-.form-crear button {
-    grid-column: 1 / span 2;
+.btn-guardar {
+    width: 100%;
+    margin-top: 8px;
     padding: 14px;
     background-color: var(--vibrant-color);
     color: #000;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 700;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: var(--transition-mid);
+    transition: filter 0.2s, transform 0.1s;
 }
-
-/* Hover según tema */
-html[data-theme="light"] .form-crear button:hover {
-    background-color: #d0e8ff;
-}
-
-html[data-theme="dark"] .form-crear button:hover {
-    background-color: #00ffff;
-}
-
-/* Responsive */
-@media (max-width: 600px) {
-    .form-crear {
-        grid-template-columns: 1fr;
-        padding: 24px;
-    }
-}
-
-/* Validación */
+.btn-guardar:hover { filter: brightness(1.1); }
+.btn-guardar:active { transform: scale(0.98); }
 .invalid-field {
     border-color: var(--error-color) !important;
     box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.25);
 }
-
 .error-text-pro {
     color: var(--error-color) !important;
     font-weight: 600;
+}
+@media (max-width: 520px) {
+    .sucursal-card { padding: 24px 18px; }
 }

@@ -12,7 +12,7 @@ public class RutaSucursalListar extends ControladorBancolombia {
         r.get("/sucursales/listar", req -> {
             Map<String, Object> modelo = modeloBase();
             modelo.put("titulo", "Listado de Sucursales");
-            modelo.put("listaSucursales", EnsambladorWeb.sucursal().obtenerTodos());
+            modelo.put("sucursal", EnsambladorWeb.sucursal().obtenerTodos());
             cargarMensajes(req, modelo);
             return vista("sucursal/listar.html", modelo);
         });
