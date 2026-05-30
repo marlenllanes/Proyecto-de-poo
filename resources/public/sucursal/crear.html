@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/sucursal_crear.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/sucursal_crear.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="sucursal-wrapper animated-fadeIn">
+
+                <h1 class="sucursal-titulo">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="sucursal-card">
+                    <form id="formCrearSucursal" action="/sucursales/crear" method="POST">
+
+                        <div class="campo-grupo">
+                            <label for="nombreSucursal">Nombre de la sucursal</label>
+                            <input type="text"
+                                   id="nombreSucursal"
+                                   name="nombreSucursal"
+                                   placeholder="Ej: Sucursal Centro"
+                                   required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="direccionSucursal">Dirección</label>
+                            <input type="text"
+                                   id="direccionSucursal"
+                                   name="direccionSucursal"
+                                   placeholder="Ej: Calle 10 # 5-20"
+                                   required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="telefonoSucursal">Teléfono</label>
+                            <input type="text"
+                                   id="telefonoSucursal"
+                                   name="telefonoSucursal"
+                                   placeholder="Ej: 3001234567"
+                                   required />
+                        </div>
+
+                        <button type="submit" class="btn-guardar">Guardar sucursal</button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>

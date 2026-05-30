@@ -14,7 +14,7 @@ public class RutaSucursalAdmin extends ControladorBancolombia {
             modelo.put("titulo", "Gestión de Sucursales");
             modelo.put("sucursales", EnsambladorWeb.sucursal().obtenerTodos());
             cargarMensajes(req, modelo);
-            return vista("sucursales/admin.html", modelo);
+            return vista("sucursal/admin.html", modelo);
         });
         r.get("/sucursales/eliminar/:id", req -> {
             int id = Integer.parseInt(req.param("id"));

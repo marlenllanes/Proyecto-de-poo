@@ -23,6 +23,10 @@ import org.banco.webconfig.ruta.prestamo.RutaPrestamoAdmin;
 import org.banco.webconfig.ruta.prestamo.RutaPrestamoCrear;
 import org.banco.webconfig.ruta.prestamo.RutaPrestamoEditar;
 import org.banco.webconfig.ruta.prestamo.RutaPrestamoListar;
+import org.banco.webconfig.ruta.sucursal.RutaSucursalAdmin;
+import org.banco.webconfig.ruta.sucursal.RutaSucursalCrear;
+import org.banco.webconfig.ruta.sucursal.RutaSucursalEditar;
+import org.banco.webconfig.ruta.sucursal.RutaSucursalListar;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaAdmin;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaCrear;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaEditar;
@@ -77,7 +81,11 @@ public class Ruteo extends ControladorBancolombia
         new RutaTarjetaListar().registrar(r);
         new RutaTarjetaCrear().registrar(r);
         new RutaTarjetaEditar().registrar(r);
-                
+        
+        new RutaSucursalAdmin().registrar(r);
+        new RutaSucursalCrear().registrar(r);
+        new RutaSucursalEditar().registrar(r);
+        new RutaSucursalListar().registrar(r);
 
 
         setManejador404(req -> {

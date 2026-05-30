@@ -2,10 +2,10 @@
 <html lang="es">
     <head>
         <meta charset="utf-8" />
-        <title>Listado de ventas</title>
+        <title>Listado de cajeros</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/assets/css/estilos.css" />
-        <link rel="stylesheet" href="/assets/css/venta_listar.css" />
+        <link rel="stylesheet" href="/assets/css/cajero_listar.css" />
                 <link rel="stylesheet" href="/assets/css/mensajeria.css">
         <link rel="stylesheet" href="/assets/css/footer.css">
          <style>
@@ -29,7 +29,7 @@
 
         <script src="/assets/js/navegacion.js" defer></script>
         <script src="/assets/js/theme-switch.js" defer></script>
-        <script src="/assets/js/venta_crear.js" defer></script>
+        <script src="/assets/js/cajero_crear.js" defer></script>
     </head>
     <body class="layout-pro">
         {{include header}}
@@ -56,31 +56,29 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre Cliente</th>
-                                 <th>fechaVenta</th>
-                                <th>totalVenta</th>
-                                 <th>ivaVenta </th>
+                                 <th>Sucursal</th>
+                                  <th>Nombre cajero</th>
+                                <th>Turno</th>
                                  <th>Acciones</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            {{#each venta}}
+                            {{#each cajero}}
                             <tr>
-                                <td>{{idVenta}}</td>
-                                <td>{{nombreCliente}}</td>
-                                <td>{{fechaVenta}}</td>
-                                <td>{{totalVenta}}</td>
-                                <td>{{ivaVenta}}</td>
+                                <td>{{idCajero}}</td>
+                                <td>{{sucursalCajero}}</td>
+                                <td>{{nombreCajero}}</td>
+                                <td>{{turnoCajero}}</td>
                                 <td>
                                     <div class="acciones-inline">
-                                    <a href="/venta/editar/{{idVenta}}" class="btn-pro editar">
+                                    <a href="/cajero/editar/{{idCajero}}" class="btn-pro editar">
                                         <img src="/assets/icon/edit.png" alt="actualizar"/>
                                     </a>
 
-                                    <a href="/venta/eliminar/{{idVenta}}" 
+                                    <a href="/cajero/eliminar/{{idCajero}}" 
                                        class="btn-pro eliminar"
-                                       onclick="return confirm('¿Eliminar esta venta?');">
+                                       onclick="return confirm('¿Eliminar este cajero?');">
                                         <img src="/assets/icon/trash.png" alt="borrar"/>
                                     </a>
                                   </div>

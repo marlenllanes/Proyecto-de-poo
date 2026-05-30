@@ -16,7 +16,7 @@ public class RutaSucursalCrear extends ControladorBancolombia {
             Map<String, Object> modelo = modeloBase();
             modelo.put("titulo", "Registrar Sucursal");
             cargarMensajes(req, modelo);
-            return vista("sucursales/crear.html", modelo);
+            return vista("sucursal/crear.html", modelo);
         });
         r.post("/sucursales/crear", req -> {
             try {

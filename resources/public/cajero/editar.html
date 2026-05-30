@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{titulo}}</title>
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/assets/css/estilos.css" />
+        <link rel="stylesheet" href="/assets/css/cajero_editar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/footer.css">
+        <script src="/assets/js/navegacion.js" defer></script>
+        <script src="/assets/js/theme-switch.js" defer></script>
+        <script src="/assets/js/cajero_editar.js" defer></script>
+    </head>
+    <body class="layout-pro">
+        {{include header}}
+        <main class="main-content-pro container">
+            <div class="cajero-wrapper animated-fadeIn">
+
+                <h1 class="cajero-titulo">{{titulo}}</h1>
+
+                {{#if msgExito}}
+                <div class="alerta-exito-pro">
+                    {{msgExito}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+                {{#if msgError}}
+                <div class="alerta-error-pro">
+                    {{msgError}}
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
+                </div>
+                {{/if}}
+
+                <div class="cajero-card">
+                    <div class="cajero-id-badge">Cajero # <span>{{idCajero}}</span></div>
+
+                    <form id="formEditarCajero" action="/cajeros/editar" method="POST">
+                        <input type="hidden" id="idCajero" name="idCajero" value="{{idCajero}}" />
+
+                        <div class="campo-grupo">
+                            <label for="sucursalCajero">Sucursal</label>
+                            <select id="sucursalCajero" name="sucursalCajero" required>
+                                <option value="">Seleccione una sucursal</option>
+                                {{#each listaSucursales}}
+                                <option value="{{idSucursal}}" {{#if seleccionado}}selected{{/if}}>{{nombreSucursal}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="nombreCajero">Nombre del cajero</label>
+                            <input type="text"
+                                   id="nombreCajero"
+                                   name="nombreCajero"
+                                   value="{{nombreCajero}}"
+                                   required />
+                        </div>
+
+                        <div class="campo-grupo">
+                            <label for="turnoCajero">Turno</label>
+                            <select id="turnoCajero" name="turnoCajero" required>
+                                <option value="">Seleccione un turno</option>
+                                <option value="MAÑANA">Mañana</option>
+                                <option value="TARDE">Tarde</option>
+                                <option value="NOCHE">Noche</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn-actualizar">Actualizar cajero</button>
+                    </form>
+                </div>
+
+            </div>
+        </main>
+        {{include footer}}
+    </body>
+</html>

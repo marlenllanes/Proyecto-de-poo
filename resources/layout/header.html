@@ -24,42 +24,6 @@
                 <a href="/" class="nav-link" data-section="inicio">Inicio</a>
             </li>
 
-            <!-- Consumo Tarjeta -->
-            <li class="nav-item dropdown-pro">
-                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="categorias">
-                    Consumo de tarjeta <span class="arrow">▼</span>
-                </a>
-                <ul class="dropdown-content-pro">
-                    <li><a href="/jajajaja/crear" data-section="categorias">Nueva</a></li>
-                    <li><a href="/categorias/listar" data-section="categorias">Listar</a></li>
-                    <li><a href="/categorias/admin" data-section="categorias">Administrar</a></li>
-                </ul>
-            </li>
-
-            <!-- Proveedores -->
-            <li class="nav-item dropdown-pro">
-                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="proveedores">
-                    Proveedores <span class="arrow">▼</span>
-                </a>
-                <ul class="dropdown-content-pro">
-                    <li><a href="/proveedores/crear" data-section="proveedores">Nuevo</a></li>
-                    <li><a href="/proveedores/listar" data-section="proveedores">Listar</a></li>
-                    <li><a href="/proveedores/admin" data-section="proveedores">Administrar</a></li>
-                </ul>
-            </li>
-
-            <!-- Productos -->
-            <li class="nav-item dropdown-pro">
-                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="productos">
-                    Productos <span class="arrow">▼</span>
-                </a>
-                <ul class="dropdown-content-pro">
-                    <li><a href="/yungi/crear" data-section="productos">Nuevo</a></li>
-                    <li><a href="/productos/listar" data-section="productos">Catálogo</a></li>
-                    <li><a href="/productos/admin" data-section="productos">Administrar catálogo</a></li>
-                </ul>
-            </li>
-
             <!-- Clientes -->
             <li class="nav-item dropdown-pro">
                 <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="clientes">
@@ -72,33 +36,113 @@
                 </ul>
             </li>
 
-            <!-- Formas de pago -->
+            <!-- Sucursales -->
             <li class="nav-item dropdown-pro">
-                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="fpago">
-                    Formas de pago <span class="arrow">▼</span>
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="sucursales">
+                    Sucursales <span class="arrow">▼</span>
                 </a>
                 <ul class="dropdown-content-pro">
-                    <li><a href="/formapago/crear" data-section="fpago">Nueva</a></li>
-                    <li><a href="/formapago/listar" data-section="fpago">Listar</a></li>
-                    <li><a href="/formapago/admin" data-section="fpago">Administrar</a></li>
+                    <li><a href="/sucursales/crear" data-section="sucursales">Nueva</a></li>
+                    <li><a href="/sucursales/listar" data-section="sucursales">Listar</a></li>
+                    <li><a href="/sucursales/admin" data-section="sucursales">Administrar</a></li>
                 </ul>
             </li>
 
-            <!-- Ventas -->
+            <!-- Productos Financieros -->
             <li class="nav-item dropdown-pro">
-                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="ventas">
-                    Ventas <span class="arrow">▼</span>
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="productos">
+                    Productos Financieros <span class="arrow">▼</span>
                 </a>
                 <ul class="dropdown-content-pro">
-                    <li><a href="/ventas/crear" data-section="ventas">Nueva</a></li>
-                    <li><a href="/ventas/listar" data-section="ventas">Listar</a></li>
-                    <li><a href="/ventas/admin" data-section="ventas">Administrar</a></li>
+                    <li><a href="/productos/crear" data-section="productos">Nuevo</a></li>
+                    <li><a href="/productos/listar" data-section="productos">Listar</a></li>
+                    <li><a href="/productos/admin" data-section="productos">Administrar</a></li>
+                </ul>
+            </li>
+
+            <!-- Cuentas Bancarias y Movimientos -->
+            <li class="nav-item dropdown-pro">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="cuentas">
+                    Cuentas <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-content-pro">
+                    <li><a href="/cuentas/crear" data-section="cuentas">Nueva cuenta</a></li>
+                    <li><a href="/cuentas/listar" data-section="cuentas">Listar cuentas</a></li>
+                    <li><a href="/cuentas/admin" data-section="cuentas">Administrar cuentas</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="/movimientos/crear" data-section="cuentas">Nuevo movimiento</a></li>
+                    <li><a href="/movimientos/listar" data-section="cuentas">Listar movimientos</a></li>
+                    <li><a href="/movimientos/admin" data-section="cuentas">Administrar movimientos</a></li>
+                </ul>
+            </li>
+
+            <!-- Tarjetas y Consumos -->
+            <li class="nav-item dropdown-pro">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="tarjetas">
+                    Tarjetas <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-content-pro">
+                    <li><a href="/tarjetas/crear" data-section="tarjetas">Nueva tarjeta</a></li>
+                    <li><a href="/tarjetas/listar" data-section="tarjetas">Listar tarjetas</a></li>
+                    <li><a href="/tarjetas/admin" data-section="tarjetas">Administrar tarjetas</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="/consumos/crear" data-section="tarjetas">Nuevo consumo</a></li>
+                    <li><a href="/consumos/listar" data-section="tarjetas">Listar consumos</a></li>
+                    <li><a href="/consumos/admin" data-section="tarjetas">Administrar consumos</a></li>
+                </ul>
+            </li>
+
+            <!-- Préstamos, Cuotas y Pagos -->
+            <li class="nav-item dropdown-pro">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="prestamos">
+                    Préstamos <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-content-pro">
+                    <li><a href="/prestamos/crear" data-section="prestamos">Nuevo préstamo</a></li>
+                    <li><a href="/prestamos/listar" data-section="prestamos">Listar préstamos</a></li>
+                    <li><a href="/prestamos/admin" data-section="prestamos">Administrar préstamos</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="/cuotas/crear" data-section="prestamos">Nueva cuota</a></li>
+                    <li><a href="/cuotas/listar" data-section="prestamos">Listar cuotas</a></li>
+                    <li><a href="/cuotas/admin" data-section="prestamos">Administrar cuotas</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="/pagos/crear" data-section="prestamos">Nuevo pago</a></li>
+                    <li><a href="/pagos/listar" data-section="prestamos">Listar pagos</a></li>
+                    <li><a href="/pagos/admin" data-section="prestamos">Administrar pagos</a></li>
+                </ul>
+            </li>
+
+            <!-- Cajeros y Transacciones -->
+            <li class="nav-item dropdown-pro">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="cajeros">
+                    Cajeros <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-content-pro">
+                    <li><a href="/cajeros/crear" data-section="cajeros">Nuevo cajero</a></li>
+                    <li><a href="/cajeros/listar" data-section="cajeros">Listar cajeros</a></li>
+                    <li><a href="/cajeros/admin" data-section="cajeros">Administrar cajeros</a></li>
+                    <li class="dropdown-divider"></li>
+                    <li><a href="/transacciones/crear" data-section="cajeros">Nueva transacción</a></li>
+                    <li><a href="/transacciones/listar" data-section="cajeros">Listar transacciones</a></li>
+                    <li><a href="/transacciones/admin" data-section="cajeros">Administrar transacciones</a></li>
+                </ul>
+            </li>
+
+            <!-- Transferencias -->
+            <li class="nav-item dropdown-pro">
+                <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-section="transferencias">
+                    Transferencias <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-content-pro">
+                    <li><a href="/transferencias/crear" data-section="transferencias">Nueva</a></li>
+                    <li><a href="/transferencias/listar" data-section="transferencias">Listar</a></li>
+                    <li><a href="/transferencias/admin" data-section="transferencias">Administrar</a></li>
                 </ul>
             </li>
 
             <!-- Acerca de -->
             <li class="nav-item">
-                <a href="/acercade" class="nav-link" data-section="sedes">Acerca de</a>
+                <a href="/acercade" class="nav-link" data-section="acercade">Acerca de</a>
             </li>
 
         </ul>

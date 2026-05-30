@@ -49,21 +49,19 @@
 
 /* === Anchos de columnas con porcentajes === */
 .tabla-pro th:nth-child(1),
-.tabla-pro td:nth-child(1) {
-    width: 15%;
-}
+.tabla-pro td:nth-child(1) { width: 8%; }
 
 .tabla-pro th:nth-child(2),
-.tabla-pro td:nth-child(2) {
-    width: 50%;
-}
+.tabla-pro td:nth-child(2) { width: 27%; }
 
 .tabla-pro th:nth-child(3),
-.tabla-pro td:nth-child(3) {
-    width: 15%;
-}
+.tabla-pro td:nth-child(3) { width: 35%; }
 
+.tabla-pro th:nth-child(4),
+.tabla-pro td:nth-child(4) { width: 20%; }
 
+.tabla-pro th:nth-child(5),
+.tabla-pro td:nth-child(5) { width: 10%; }
 
 /* Alternancia de filas */
 .tabla-pro tr:nth-child(even) {
@@ -75,25 +73,6 @@
     background-color: var(--dropdown-hover-bg);
     transition: var(--transition-fast);
 }
-
-/* === Estados === */
-.estado-pro {
-    font-weight: 600;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: 13px;
-}
-
-.estado-pro.activo {
-    color: #00d68f;
-    background-color: rgba(0, 214, 143, 0.15);
-}
-
-.estado-pro.inactivo {
-    color: #ff4d6d;
-    background-color: rgba(255, 77, 109, 0.15);
-}
-
 /* === Botones === */
 /* === Botones con iconos (versión PRO) === */
 .btn-pro {

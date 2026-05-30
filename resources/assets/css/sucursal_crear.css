@@ -1,11 +1,11 @@
-/* === Crear forma de pago (estilos específicos) === */
+/* === Crear sucursal (estilos específicos) === */
 
 .crear-wrapper {
     max-width: 700px;
     margin: 30px auto;
 }
 
-.titulo-formaPago {
+.titulo-sucursal {
     text-align: left;
     margin-bottom: 20px;
     font-size: 26px;

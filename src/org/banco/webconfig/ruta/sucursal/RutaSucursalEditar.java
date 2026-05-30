@@ -12,7 +12,7 @@ public class RutaSucursalEditar extends ControladorBancolombia {
 
     @Override
     public void registrar(Router r) {
-        r.get("/sucursales/editar/:id", req -> {
+        r.get("/sucursal/editar/:id", req -> {
             try {
                 int codigo = Integer.parseInt(req.param("id"));
                 Optional<SucursalDto> suc = EnsambladorWeb.sucursal().obtenerUno(codigo);
@@ -30,14 +30,14 @@ public class RutaSucursalEditar extends ControladorBancolombia {
                 modelo.put("telefonoSucursal", dto.telefonoSucursal());
 
                 cargarMensajes(req, modelo);
-                return vista("sucursales/editar.html", modelo);
+                return vista("sucursal/editar.html", modelo);
             } catch (Exception e) {
                 req.mensaje("error", "ID inválido.");
                 return redireccionar("/sucursales/admin");
             }
         });
 
-        r.post("/sucursales/editar/guardar", req -> {
+        r.post("/sucursal/editar/guardar", req -> {
             try {
                 Map<String, String> formulario = parsearFormulario(req);
                 int id = Integer.parseInt(formulario.get("idSucursal"));
@@ -53,7 +53,7 @@ public class RutaSucursalEditar extends ControladorBancolombia {
                 } else {
                     req.mensaje("error", "No se pudo actualizar la sucursal.");
                 }
-                return redireccionar("/sucursales/editar/" + id);
+                return redireccionar("/sucursal/editar/" + id);
             } catch (Exception e) {
                 req.mensaje("error", "Los datos ingresados tienen un formato inválido o están vacíos.");
                 return redireccionar("/sucursales/admin");

@@ -1,69 +1,58 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="light">
     <head>
         <meta charset="utf-8" />
-        <title>Listado de Categorías</title>
+        <title>{{titulo}}</title>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="stylesheet" href="/assets/css/estilos.css" />
-        <link rel="stylesheet" href="/assets/css/categoria_listar.css" />
-                <link rel="stylesheet" href="/assets/css/mensajeria.css">
+        <link rel="stylesheet" href="/assets/css/sucursal_listar.css" />
+        <link rel="stylesheet" href="/assets/css/mensajeria.css">
         <link rel="stylesheet" href="/assets/css/footer.css">
-
         <script src="/assets/js/navegacion.js" defer></script>
         <script src="/assets/js/theme-switch.js" defer></script>
-        <script src="/assets/js/categoria_listar.js" defer></script>
+        <script src="/assets/js/sucursal_listar.js" defer></script>
     </head>
     <body class="layout-pro">
         {{include header}}
         <main class="main-content-pro container">
             <div class="tabla-wrapper-pro animated-fadeIn">
                 <h1>{{titulo}}</h1>
-
                 {{#if msgExito}}
                 <div class="alerta-exito-pro">
                     {{msgExito}}
-                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
                 </div>
                 {{/if}}
-
                 {{#if msgError}}
                 <div class="alerta-error-pro">
                     {{msgError}}
-                    <span class="alerta-cerrar" onclick="this.parentElement.style.display = 'none'">✕</span>
+                    <span class="alerta-cerrar" onclick="this.parentElement.style.display='none'">✕</span>
                 </div>
                 {{/if}}
-
                 <div class="tabla-card-pro">
                     <table class="tabla-pro">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nombre categoría</th>
-                                <th>Estado</th>
+                                <th>Nombre</th>
+                                <th>Dirección</th>
+                                <th>Teléfono</th>
                             </tr>
                         </thead>
-
                         <tbody>
-                            {{#each categorias}}
+                            {{#each sucursal}}
                             <tr>
-                                <td>{{idCategoria}}</td>
-                                <td>{{nombreCategoria}}</td>
-                                <td>
-                                    {{#if estadoCategoria}}
-                                    <span class="estado-pro activo">Activo</span>
-                                    {{else}}
-                                    <span class="estado-pro inactivo">Inactivo</span>
-                                    {{/if}}
-                                </td>
+                                <td>{{idSucursal}}</td>
+                                <td>{{nombreSucursal}}</td>
+                                <td>{{direccionSucursal}}</td>
+                                <td>{{telefonoSucursal}}</td>
                             </tr>
                             {{/each}}
                         </tbody>
                     </table>
                 </div>
             </div>
-
         </main>
-
         {{include footer}}
     </body>
 </html>

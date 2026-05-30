@@ -16,9 +16,9 @@ public class RutaCajeroCrear extends ControladorBancolombia {
         r.get("/cajeros/crear", req -> {
             Map<String, Object> modelo = modeloBase();
             modelo.put("titulo", "Registrar Cajero");
-            modelo.put("sucursales", EnsambladorWeb.cajero().obtenerTodos());
+            modelo.put("listaSucursales", EnsambladorWeb.sucursal().obtenerTodos());
             cargarMensajes(req, modelo);
-            return vista("cajeros/crear.html", modelo);
+            return vista("cajero/crear.html", modelo);
         });
 
         r.post("/cajeros/crear", req -> {
@@ -27,7 +27,7 @@ public class RutaCajeroCrear extends ControladorBancolombia {
 
                 Optional<CajeroDto> resultado = EnsambladorWeb.cajero().crear(
                         new CajeroCrearDto(
-                                Integer.parseInt(formulario.get("idSucursalCajero")),
+                                 Integer.valueOf(formulario.get("sucursalCajero")),
                                 formulario.get("nombreCajero"),
                                 formulario.get("turnoCajero")
                         )

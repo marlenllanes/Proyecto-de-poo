@@ -1,36 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const form = document.querySelector(".form-editar");
-    const id = document.getElementById("idFormaPago");
-    const nombre = document.getElementById("nombreFormaPago");
+    const form = document.getElementById("formCrearSucursal");
+    const nombre = document.getElementById("nombreSucursal");
+    const direccion = document.getElementById("direccionSucursal");
+    const telefono = document.getElementById("telefonoSucursal");
 
     form.addEventListener("submit", (e) => {
         let valido = true;
-
         limpiarErrores();
 
         if (nombre.value.trim() === "") {
             marcarError(nombre, "El nombre es obligatorio");
             valido = false;
         }
-
-        if (!valido) {
-            e.preventDefault();
+        if (direccion.value.trim() === "") {
+            marcarError(direccion, "La dirección es obligatoria");
+            valido = false;
         }
+        if (telefono.value.trim() === "") {
+            marcarError(telefono, "El teléfono es obligatorio");
+            valido = false;
+        }
+        if (!valido) e.preventDefault();
     });
 
-    function marcarError(campo, mensaje) {
+    function marcarError(campo) {
         campo.classList.add("invalid-field");
-
         let label = campo.labels?.[0];
         if (label) {
             label.classList.add("error-text-pro");
             label.textContent = "* " + label.textContent.replace("* ", "");
-        }
-
-        let msg = campo.parentElement.querySelector(".msg-error");
-        if (msg) {
-            msg.textContent = mensaje;
-            msg.style.display = "block";
         }
     }
 
@@ -41,4 +39,12 @@ document.addEventListener("DOMContentLoaded", () => {
             label.textContent = label.textContent.replace("* ", "");
         });
     }
+
+    const alertas = document.querySelectorAll(".alerta-exito-pro, .alerta-error-pro");
+    alertas.forEach(alerta => {
+        setTimeout(() => {
+            alerta.style.opacity = "0";
+            setTimeout(() => alerta.remove(), 500);
+        }, 5000);
+    });
 });

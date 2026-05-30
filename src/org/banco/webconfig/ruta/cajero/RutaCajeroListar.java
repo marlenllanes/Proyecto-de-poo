@@ -14,7 +14,7 @@ public class RutaCajeroListar extends ControladorBancolombia {
             modelo.put("titulo", "Listado de Cajeros");
             modelo.put("listaCajeros", EnsambladorWeb.cajero().obtenerTodos());
             cargarMensajes(req, modelo);
-            return vista("cajeros/listar.html", modelo);
+            return vista("cajero/listar.html", modelo);
         });
 
     }

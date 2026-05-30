@@ -14,7 +14,7 @@ public class RutaSucursalListar extends ControladorBancolombia {
             modelo.put("titulo", "Listado de Sucursales");
             modelo.put("listaSucursales", EnsambladorWeb.sucursal().obtenerTodos());
             cargarMensajes(req, modelo);
-            return vista("sucursales/listar.html", modelo);
+            return vista("sucursal/listar.html", modelo);
         });
     }
 }

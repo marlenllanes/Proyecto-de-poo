@@ -1,11 +1,9 @@
-/* === Crear Categoría (estilos específicos) === */
-
-.crear-wrapper {
+.editar-wrapper {
     max-width: 700px;
     margin: 30px auto;
 }
 
-.titulo-categoria {
+.titulo-sucursal {
     text-align: left;
     margin-bottom: 20px;
     font-size: 26px;
@@ -13,7 +11,7 @@
     color: var(--text-primary);
 }
 
-.form-crear {
+.form-editar {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 12px;
@@ -25,14 +23,14 @@
     align-items: center;
 }
 
-.form-crear label {
+.form-editar label {
     font-size: 14px;
     font-weight: 500;
     color: var(--text-secondary);
 }
 
-.form-crear input[type="text"],
-.form-crear select {
+.form-editar input[type="text"],
+.form-editar select {
     padding: 12px;
     background-color: var(--bg-input);
     border: 1px solid var(--border-color);
@@ -42,14 +40,14 @@
     transition: border-color var(--transition-fast);
 }
 
-.form-crear input:focus,
-.form-crear select:focus {
+.form-editar input:focus,
+.form-editar select:focus {
     border-color: var(--vibrant-color);
     box-shadow: 0 0 0 3px rgba(0, 242, 254, 0.15);
     outline: none;
 }
 
-.form-crear button {
+.form-editar button {
     grid-column: 1 / span 2;
     padding: 14px;
     background-color: var(--vibrant-color);
@@ -63,17 +61,17 @@
 }
 
 /* Hover según tema */
-html[data-theme="light"] .form-crear button:hover {
+html[data-theme="light"] .form-editar button:hover {
     background-color: #d0e8ff;
 }
 
-html[data-theme="dark"] .form-crear button:hover {
+html[data-theme="dark"] .form-editar button:hover {
     background-color: #00ffff;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-    .form-crear {
+    .form-editar {
         grid-template-columns: 1fr;
         padding: 24px;
     }

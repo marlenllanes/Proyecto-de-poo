@@ -13,7 +13,7 @@ public class RutaCajeroEditar extends ControladorBancolombia {
     @Override
     public void registrar(Router r) {
 
-        r.get("/cajeros/editar/:id", req -> {
+        r.get("/cajero/editar/:id", req -> {
             try {
                 int codigo = Integer.parseInt(req.param("id"));
                 Optional<CajeroDto> caje = EnsambladorWeb.cajero().obtenerUno(codigo);
@@ -28,22 +28,22 @@ public class RutaCajeroEditar extends ControladorBancolombia {
                 modelo.put("idSucursalCajero", dto.idSucursalCajero());
                 modelo.put("nombreCajero", dto.nombreCajero());
                 modelo.put("turnoCajero", dto.turnoCajero());
-                modelo.put("sucursales", EnsambladorWeb.sucursal().obtenerTodos());
+                modelo.put("listaSucursales", EnsambladorWeb.sucursal().obtenerTodos());
                 cargarMensajes(req, modelo);
-                return vista("cajeros/editar.html", modelo);
+                return vista("cajero/editar.html", modelo);
             } catch (Exception e) {
                 req.mensaje("error", "ID inválido.");
                 return redireccionar("/cajeros/admin");
             }
         });
 
-        r.post("/cajeros/editar/guardar", req -> {
+        r.post("/cajero/editar/guardar", req -> {
             try {
                 Map<String, String> formulario = parsearFormulario(req);
                 int id = Integer.parseInt(formulario.get("idCajero"));
                 CajeroActualizarDto dto = new CajeroActualizarDto(
                         id,
-                        Integer.parseInt(formulario.get("idSucursalCajero")),
+                         Integer.valueOf(formulario.get("sucursalCajero")),
                         formulario.get("nombreCajero"),
                         formulario.get("turnoCajero")
                 );

@@ -15,7 +15,7 @@ public class RutaCajeroAdmin extends ControladorBancolombia{
             modelo.put("titulo", "Gestión de Cajeros");
             modelo.put("cajeros", EnsambladorWeb.cajero().obtenerTodos());
             cargarMensajes(req, modelo);
-            return vista("cajeros/admin.html", modelo);
+            return vista("cajero/admin.html", modelo);
         });
         
          r.get("/cajeros/eliminar/:id", req -> {
