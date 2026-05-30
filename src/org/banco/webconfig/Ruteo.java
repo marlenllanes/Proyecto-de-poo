@@ -15,6 +15,18 @@ import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaAdmin;
 import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaCrear;
 import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaEditar;
 import org.banco.webconfig.ruta.consumotarjeta.RutaConsumoTarjetaListar;
+import org.banco.webconfig.ruta.cuentabancaria.RutaCuentaBancariaAdmin;
+import org.banco.webconfig.ruta.cuentabancaria.RutaCuentaBancariaCrear;
+import org.banco.webconfig.ruta.cuentabancaria.RutaCuentaBancariaEditar;
+import org.banco.webconfig.ruta.cuentabancaria.RutaCuentaBancariaListar;
+import org.banco.webconfig.ruta.prestamo.RutaPrestamoAdmin;
+import org.banco.webconfig.ruta.prestamo.RutaPrestamoCrear;
+import org.banco.webconfig.ruta.prestamo.RutaPrestamoEditar;
+import org.banco.webconfig.ruta.prestamo.RutaPrestamoListar;
+import org.banco.webconfig.ruta.tarjeta.RutaTarjetaAdmin;
+import org.banco.webconfig.ruta.tarjeta.RutaTarjetaCrear;
+import org.banco.webconfig.ruta.tarjeta.RutaTarjetaEditar;
+import org.banco.webconfig.ruta.tarjeta.RutaTarjetaListar;
 
 
 public class Ruteo extends ControladorBancolombia
@@ -50,6 +62,21 @@ public class Ruteo extends ControladorBancolombia
         new RutaConsumoTarjetaCrear().registrar(r);
         new  RutaConsumoTarjetaEditar().registrar(r);
         new RutaConsumoTarjetaListar().registrar(r);
+        
+        new RutaCuentaBancariaAdmin().registrar(r);
+        new RutaCuentaBancariaCrear().registrar(r);
+        new RutaCuentaBancariaEditar().registrar(r);
+        new RutaCuentaBancariaListar().registrar(r);
+        
+        new RutaPrestamoAdmin().registrar(r);
+        new RutaPrestamoCrear().registrar(r);
+        new RutaPrestamoEditar().registrar(r);
+        new RutaPrestamoListar().registrar(r);
+        
+        new RutaTarjetaAdmin().registrar(r);
+        new RutaTarjetaListar().registrar(r);
+        new RutaTarjetaCrear().registrar(r);
+        new RutaTarjetaEditar().registrar(r);
                 
 
 
