@@ -31,7 +31,10 @@ import org.banco.webconfig.ruta.tarjeta.RutaTarjetaAdmin;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaCrear;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaEditar;
 import org.banco.webconfig.ruta.tarjeta.RutaTarjetaListar;
-
+import org.banco.webconfig.ruta.transferencia.RutaTransferenciaAdmin;
+import org.banco.webconfig.ruta.transferencia.RutaTransferenciaCrear;
+import org.banco.webconfig.ruta.transferencia.RutaTransferenciaEditar;
+import org.banco.webconfig.ruta.transferencia.RutaTransferenciaListar;
 
 public class Ruteo extends ControladorBancolombia
         implements RegistroRutas {
@@ -56,37 +59,41 @@ public class Ruteo extends ControladorBancolombia
         new RutaClienteCrear().registrar(r);
         new RutaClienteEditar().registrar(r);
         new RutaClienteListar().registrar(r);
-        
+
         new RutaCajeroAdmin().registrar(r);
         new RutaCajeroCrear().registrar(r);
         new RutaCajeroEditar().registrar(r);
         new RutaCajeroListar().registrar(r);
-                
+
         new RutaConsumoTarjetaAdmin().registrar(r);
         new RutaConsumoTarjetaCrear().registrar(r);
-        new  RutaConsumoTarjetaEditar().registrar(r);
+        new RutaConsumoTarjetaEditar().registrar(r);
         new RutaConsumoTarjetaListar().registrar(r);
-        
+
         new RutaCuentaBancariaAdmin().registrar(r);
         new RutaCuentaBancariaCrear().registrar(r);
         new RutaCuentaBancariaEditar().registrar(r);
         new RutaCuentaBancariaListar().registrar(r);
-        
+
         new RutaPrestamoAdmin().registrar(r);
         new RutaPrestamoCrear().registrar(r);
         new RutaPrestamoEditar().registrar(r);
         new RutaPrestamoListar().registrar(r);
-        
+
         new RutaTarjetaAdmin().registrar(r);
         new RutaTarjetaListar().registrar(r);
         new RutaTarjetaCrear().registrar(r);
         new RutaTarjetaEditar().registrar(r);
-        
+
         new RutaSucursalAdmin().registrar(r);
         new RutaSucursalCrear().registrar(r);
         new RutaSucursalEditar().registrar(r);
         new RutaSucursalListar().registrar(r);
 
+        new RutaTransferenciaAdmin().registrar(r);
+        new RutaTransferenciaCrear().registrar(r);
+        new RutaTransferenciaEditar().registrar(r);
+        new RutaTransferenciaListar().registrar(r);
 
         setManejador404(req -> {
             Map<String, Object> modelo = modeloBase();

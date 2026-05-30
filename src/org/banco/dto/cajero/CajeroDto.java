@@ -1,8 +1,10 @@
 package org.banco.dto.cajero;
 
+import org.banco.dto.sucursal.SucursalDto;
+
 public record CajeroDto(
         Integer idCajero,
-        Integer idSucursalCajero,    
+        SucursalDto idSucursalCajero,    
         String nombreCajero,
         String turnoCajero
 

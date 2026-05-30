@@ -1,0 +1,106 @@
+.transferencia-wrapper {
+    max-width: 560px;
+    margin: 48px auto;
+    padding: 0 16px;
+}
+
+.transferencia-titulo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 28px;
+    padding-bottom: 12px;
+    display: inline-block;
+}
+
+.transferencia-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 40px 36px;
+    box-shadow: var(--shadow-card);
+}
+
+.transferencia-id-badge {
+    display: inline-block;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+.transferencia-id-badge span {
+    font-weight: 700;
+    color: var(--vibrant-color);
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+}
+
+.campo-grupo label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.campo-grupo input,
+.campo-grupo select,
+.campo-grupo textarea {
+    padding: 11px 14px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--input-text-color);
+    font-size: 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.campo-grupo input:focus,
+.campo-grupo select:focus,
+.campo-grupo textarea:focus {
+    border-color: var(--vibrant-color);
+    box-shadow: 0 0 0 3px rgba(0, 162, 255, 0.15);
+    outline: none;
+}
+
+.btn-actualizar {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    background-color: var(--vibrant-color);
+    color: #000;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+}
+
+.btn-actualizar:hover { filter: brightness(1.1); }
+.btn-actualizar:active { transform: scale(0.98); }
+
+.invalid-field {
+    border-color: var(--error-color) !important;
+    box-shadow: 0 0 0 3px rgba(255, 51, 102, 0.25);
+}
+
+.error-text-pro {
+    color: var(--error-color) !important;
+    font-weight: 600;
+}
+
+@media (max-width: 520px) {
+    .transferencia-card { padding: 24px 18px; }
+}

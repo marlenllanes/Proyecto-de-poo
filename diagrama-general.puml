@@ -1,0 +1,2063 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam interfaceBackgroundColour #CCFFCC
+skinparam abstractClassBackgroundColour #FFF4E6
+
+class CuotaPrestamoControlador #FFFFFF {
+    - servicio : CuotaPrestamoServicio
+    + CuotaPrestamoControlador(CuotaPrestamoServicio)
+    + crear(CuotaPrestamoCrearDto) : Optional<CuotaPrestamoDto>
+    + actualizar(Integer, CuotaPrestamoActualizarDto) : Optional<CuotaPrestamoDto>
+    + obtenerTodos() : List<CuotaPrestamoDto>
+    + obtenerUno(Integer) : Optional<CuotaPrestamoDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class TransferenciaActualizarDto <<record>> #9EC5FF {
+    + idTransferencia : Integer
+    + idCuentaOrigen : Integer
+    + idCuentaDestino : Integer
+    + fechaTransferencia : OffsetDateTime
+    + valorTransferencia : BigDecimal
+    + descripcionTransferencia : String
+}
+
+interface ApiMapeador #CCFFCC {
+    + toDto(E) : R
+    + toEntityFromCrear(C) : E
+    + toEntityFromActualizar(U) : E
+    + toDtoList(List<E>) : List<R>
+}
+
+class ConsumoTarjetaDto <<record>> #9EC5FF {
+    + idConsumoTarjeta : Integer
+    + tarjeta : TarjetaDto
+    + fechaConsumoTarjeta : OffsetDateTime
+    + establecimientoConsumoTarjeta : String
+    + valorConsumoTarjeta : BigDecimal
+    + cuotaConsumoTarjeta : Integer
+}
+
+interface ClienteProductoSucursalRepositorio #CCFFCC {
+}
+
+class MovimientoCuentaCrearDto <<record>> #9EC5FF {
+    + idCuenta : Integer
+    + tipoMovimientoCuenta : String
+    + valorMovimientoCuenta : BigDecimal
+    + fechaMovimientoCuenta : OffsetDateTime
+    + saldoPosteriorMovimientoCuenta : BigDecimal
+}
+
+interface PrestamoRepositorio #CCFFCC {
+}
+
+interface ProductoFinacieroRepositorio #CCFFCC {
+}
+
+class RutaPrestamoListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteProductoSucursal #FFFFFF {
+    - idClienteProductoSucursalPk : ClienteProductoSucursalPk
+    - fechaAdquisicion : OffsetDateTime
+    - valorInicial : BigDecimal
+    - estado : String
+    + ClienteProductoSucursal(Integer, Integer, Integer)
+    + ClienteProductoSucursal(Integer, Integer, Integer, BigDecimal)
+}
+
+class ClienteServicio #FFFFFF {
+    - repositorio : ClienteRepositorio
+    + ClienteServicio(ClienteRepositorio)
+    + insertInto(ClienteCrearDto) : ClienteDto
+    + updateSet(Integer, ClienteActualizarDto) : ClienteDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<ClienteDto>
+    + selectOne(Integer) : ClienteDto
+    + countRows() : int
+    + lastSerial() : int
+    - sinFechaNacimientoInvalida(List<Cliente>) : List<Cliente>
+    - sinCorreoValido(List<Cliente>) : List<Cliente>
+}
+
+class App #FFFFFF {
+    + main(String[]) : void
+}
+
+class ValidadorCorreo #FFFFFF {
+    - PATRON_CORREO : String
+    - PATRON : Pattern
+    + validarCorreo(String) : boolean
+}
+
+class ClienteMapeador #FFFFFF {
+    + SINGLETON : ClienteMapeador
+    - ClienteMapeador()
+    + toDto(Cliente) : ClienteDto
+    + toEntityFromCrear(ClienteCrearDto) : Cliente
+    + toEntityFromActualizar(ClienteActualizarDto) : Cliente
+    + toDtoList(List<Cliente>) : List<ClienteDto>
+}
+
+class ClienteProductoSucursalPk #FFFFFF {
+    - cliente : Cliente
+    - productoFinanciero : ProductoFinanciero
+    - sucursal : Sucursal
+    + ClienteProductoSucursalPk(Cliente, ProductoFinanciero, Sucursal)
+    + conIds(Integer, Integer, Integer) : ClienteProductoSucursalPk
+}
+
+class TarjetaControlador #FFFFFF {
+    - servicio : TarjetaServicio
+    + TarjetaControlador(TarjetaServicio)
+    + crear(TarjetaCrearDto) : Optional<TarjetaDto>
+    + actualizar(Integer, TarjetaActualizarDto) : Optional<TarjetaDto>
+    + obtenerTodos() : List<TarjetaDto>
+    + obtenerUno(Integer) : Optional<TarjetaDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class PrestamoActualizarDto <<record>> #9EC5FF {
+    + idPrestamo : Integer
+    + idCliente : Integer
+    + montoPrestamo : BigDecimal
+    + tasaInteresPrestamo : BigDecimal
+    + fechaDesembolsoPrestamo : OffsetDateTime
+    + estadoPrestamo : String
+}
+
+class RutaSucursalAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteDto <<record>> #9EC5FF {
+    + idCliente : Integer
+    + nombreCliente : String
+    + documentoCliente : String
+    + correoCliente : String
+    + celularCliente : String
+    + fechaNacimientoCliente : OffsetDateTime
+    + direccionCliente : String
+}
+
+class ConsumoTarjetaMapeador #FFFFFF {
+    + SINGLETON : ConsumoTarjetaMapeador
+    - ConsumoTarjetaMapeador()
+    + toDto(ConsumoTarjeta) : ConsumoTarjetaDto
+    + toEntityFromCrear(ConsumoTarjetaCrearDto) : ConsumoTarjeta
+    + toEntityFromActualizar(ConsumoTarjetaActualizarDto) : ConsumoTarjeta
+    + toDtoList(List<ConsumoTarjeta>) : List<ConsumoTarjetaDto>
+}
+
+class Router <<library>> #E0E0E0 {
+}
+
+class GenerarDiagrama #FFFFFF {
+    + main(String[]) : void
+}
+
+class Sucursal #FFFFFF {
+    - idSucursal : Integer
+    - nombreSucursal : String
+    - direccionSucursal : String
+    - telefonoSucursal : String
+    + Sucursal()
+}
+
+class CuotaPrestamoRepositorioImpl #FFFFFF {
+    + CuotaPrestamoRepositorioImpl(boolean)
+}
+
+class ClienteActualizarDto <<record>> #9EC5FF {
+    + idCliente : Integer
+    + nombreCliente : String
+    + documentoCliente : String
+    + correoCliente : String
+    + celularCliente : String
+    + fechaNacimientoCliente : OffsetDateTime
+    + direccionCliente : String
+}
+
+class CuotaPrestamoDto <<record>> #9EC5FF {
+    + idCuotaPrestamo : Integer
+    + prestamo : PrestamoDto
+    + numeroCuotaPrestamo : Integer
+    + fechaVencimientoCuotaPrestamo : OffsetDateTime
+    + valorCuotaPrestamo : BigDecimal
+    + estadoCuotaPrestamo : String
+}
+
+class MovimientoCuentaActualizarDto <<record>> #9EC5FF {
+    + idMovimientoCuenta : Integer
+    + idCuenta : Integer
+    + tipoMovimientoCuenta : String
+    + valorMovimientoCuenta : BigDecimal
+    + fechaMovimientoCuenta : OffsetDateTime
+    + saldoPosteriorMovimientoCuenta : BigDecimal
+}
+
+class CajeroControlador #FFFFFF {
+    - servicio : CajeroServicio
+    + CajeroControlador(CajeroServicio)
+    + crear(CajeroCrearDto) : Optional<CajeroDto>
+    + actualizar(Integer, CajeroActualizarDto) : Optional<CajeroDto>
+    + obtenerTodos() : List<CajeroDto>
+    + obtenerUno(Integer) : Optional<CajeroDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class ConsumoTarjetaCrearDto <<record>> #9EC5FF {
+    + idTarjeta : Integer
+    + fechaConsumoTarjeta : OffsetDateTime
+    + establecimientoConsumoTarjeta : String
+    + valorConsumoTarjeta : BigDecimal
+    + cuotaConsumoTarjeta : Integer
+}
+
+class PlainTextJoin <<library>> #E0E0E0 {
+}
+
+class RutaSucursalCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PagoPrestamoCrearDto <<record>> #9EC5FF {
+    + idPrestamo : Integer
+    + fechaPagoPrestamo : OffsetDateTime
+    + valorPagoPrestamo : BigDecimal
+    + metodoPagoPrestamo : String
+}
+
+class RutaConsumoTarjetaEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCajeroListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class CajeroDto <<record>> #9EC5FF {
+    + idCajero : Integer
+    + idSucursalCajero : SucursalDto
+    + nombreCajero : String
+    + turnoCajero : String
+}
+
+class Pattern <<library>> #E0E0E0 {
+}
+
+interface TarjetaRepositorio #CCFFCC {
+}
+
+class ClienteProductoSucursalActualizarDto <<record>> #9EC5FF {
+    + idCliente : Integer
+    + idProductoFinanciero : Integer
+    + idSucursal : Integer
+    + fechaAdquisicion : OffsetDateTime
+    + valorInicial : BigDecimal
+    + estado : String
+}
+
+class PagoPrestamo #FFFFFF {
+    - idPagoPrestamo : Integer
+    - prestamoPagoPrestamo : Prestamo
+    - fechaPagoPrestamo : OffsetDateTime
+    - valorPagoPrestamo : BigDecimal
+    - metodoPagoPrestamo : String
+    + PagoPrestamo()
+}
+
+interface CuotaPrestamoRepositorio #CCFFCC {
+}
+
+class RutaTarjetaAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class TransaccionCajeroControlador #FFFFFF {
+    - servicio : TransaccionCajeroServicio
+    + TransaccionCajeroControlador(TransaccionCajeroServicio)
+    + crear(TransaccionCajeroCrearDto) : Optional<TransaccionCajeroDto>
+    + actualizar(Integer, TransaccionCajeroActualizarDto) : Optional<TransaccionCajeroDto>
+    + obtenerTodos() : List<TransaccionCajeroDto>
+    + obtenerUno(Integer) : Optional<TransaccionCajeroDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class RutaProductoFinancieroEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class TransaccionCajeroActualizarDto <<record>> #9EC5FF {
+    + idTransaccionCajero : Integer
+    + idCajero : Integer
+    + idCuenta : Integer
+    + tipoTransaccionCajero : String
+    + valorTransaccionCajero : BigDecimal
+    + fechaTransaccionCajero : OffsetDateTime
+}
+
+class CuentaBancariaRepositorioImpl #FFFFFF {
+    + CuentaBancariaRepositorioImpl(boolean)
+}
+
+interface ApiOperacionCompuestaServicio #CCFFCC {
+    + insertInto(C) : C
+    + updateSet(ID, U) : U
+    + deleteFrom(ID) : Boolean
+    + selectFrom() : List<H>
+    + selectOne(ID) : H
+    + countRows() : int
+}
+
+interface CajeroRepositorio #CCFFCC {
+}
+
+class TransferenciaServicio #FFFFFF {
+    - repositorio : TransferenciaRepositorio
+    - cuentaBancariaRepositorio : CuentaBancariaRepositorio
+    + TransferenciaServicio(TransferenciaRepositorio, CuentaBancariaRepositorio)
+    - toPk(TransferenciaIdentificadorDto) : TransferenciaPk
+    - buscarEntidadPorPk(TransferenciaPk) : Transferencia
+    + insertInto(TransferenciaCrearDto) : TransferenciaCrearDto
+    + updateSet(TransferenciaIdentificadorDto, TransferenciaActualizarDto) : TransferenciaActualizarDto
+    + deleteFrom(TransferenciaIdentificadorDto) : Boolean
+    + countRows() : int
+    + selectFrom() : List<TransferenciaDto>
+    + selectOne(TransferenciaIdentificadorDto) : TransferenciaDto
+    - mapaCuentas(List<CuentaBancaria>) : Map<Integer,CuentaBancaria>
+    - sinCuentaOrigenNula(List<Transferencia>) : List<Transferencia>
+    - sinCuentaDestinoNula(List<Transferencia>) : List<Transferencia>
+    - sinCuentaOrigenInexistente(List<Transferencia>, Map<Integer,CuentaBancaria>) : List<Transferencia>
+    - sinCuentaDestinoInexistente(List<Transferencia>, Map<Integer,CuentaBancaria>) : List<Transferencia>
+    - hidratarCuentas(List<Transferencia>, Map<Integer,CuentaBancaria>) : void
+}
+
+class Inicializador #FFFFFF {
+    - cajeroRepositorio : CajeroRepositorio
+    - clienteRepositorio : ClienteRepositorio
+    - clienteProductoSucursalRepositorio : ClienteProductoSucursalRepositorio
+    - consumoTarjetaRepositorio : ConsumoTarjetaRepositorio
+    - cuentaBancariaRepositorio : CuentaBancariaRepositorio
+    - cuotaPrestamoRepositorio : CuotaPrestamoRepositorio
+    - movimientoCuentaRepositorio : MovimientoCuentaRepositorio
+    - pagoPrestamoRepositorio : PagoPrestamoRepositorio
+    - prestamoRepositorio : PrestamoRepositorio
+    - productoFinacieroRepositorio : ProductoFinacieroRepositorio
+    - sucursalRepositorio : SucursalRepositorio
+    - tarjetaRepositorio : TarjetaRepositorio
+    - transaccionCajeroRepositorio : TransaccionCajeroRepositorio
+    - transferenciaRepositorio : TransferenciaRepositorio
+    - cajeroServicio : CajeroServicio
+    - clienteServicio : ClienteServicio
+    - clienteProductoSucursalServicio : ClienteProductoSucursalServicio
+    - consumoTarjetaServicio : ConsumoTarjetaServicio
+    - cuentaBancariaServicio : CuentaBancariaServicio
+    - cuotaPrestamoServicio : CuotaPrestamoServicio
+    - movimientoCuentaServicio : MovimientoCuentaServicio
+    - pagoPrestamoServicio : PagoPrestamoServicio
+    - prestamoServicio : PrestamoServicio
+    - productoFinacieroServicio : ProductoFinancieroServicio
+    - sucursalServicio : SucursalServicio
+    - tarjetaServicio : TarjetaServicio
+    - transaccionCajeroServicio : TransaccionCajeroServicio
+    - transferenciaServicio : TransferenciaServicio
+    - cajeroControlador : CajeroControlador
+    - clienteControlador : ClienteControlador
+    - clienteProductoSucursalControlador : ClienteProductoSucursalControlador
+    - consumoTarjetaControlador : ConsumoTarjetaControlador
+    - cuentaBancariaControlador : CuentaBancariaControlador
+    - cuotaPrestamoControlador : CuotaPrestamoControlador
+    - movimientoCuentaControlador : MovimientoCuentaControlador
+    - pagoPrestamoControlador : PagoPrestamoControlador
+    - prestamoControlador : PrestamoControlador
+    - productoFinacieroControlador : ProductoFinancieroControlador
+    - sucursalControlador : SucursalControlador
+    - tarjetaControlador : TarjetaControlador
+    - transaccionCajeroControlador : TransaccionCajeroControlador
+    - transferenciaControlador : TransferenciaControlador
+    + ejecutar() : void
+    - inicializarRepositorios() : void
+    - inicializarServicios() : void
+    - inicializarControladores() : void
+}
+
+class TransaccionCajeroServicio #FFFFFF {
+    - repositorio : TransaccionCajeroRepositorio
+    - cajeroRepositorio : CajeroRepositorio
+    - cuentaBancariaRepositorio : CuentaBancariaRepositorio
+    + TransaccionCajeroServicio(TransaccionCajeroRepositorio, CajeroRepositorio, CuentaBancariaRepositorio)
+    + insertInto(TransaccionCajeroCrearDto) : TransaccionCajeroDto
+    + updateSet(Integer, TransaccionCajeroActualizarDto) : TransaccionCajeroDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<TransaccionCajeroDto>
+    + selectOne(Integer) : TransaccionCajeroDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaCajeros(List<Cajero>) : Map<Integer,Cajero>
+    - mapaCuentas(List<CuentaBancaria>) : Map<Integer,CuentaBancaria>
+    - sinCajeroNulo(List<TransaccionCajero>) : List<TransaccionCajero>
+    - sinCajeroInexistente(List<TransaccionCajero>, Map<Integer,Cajero>) : List<TransaccionCajero>
+    - sinCuentaNula(List<TransaccionCajero>) : List<TransaccionCajero>
+    - sinCuentaInexistente(List<TransaccionCajero>, Map<Integer,CuentaBancaria>) : List<TransaccionCajero>
+    - hidratarRelaciones(List<TransaccionCajero>, Map<Integer,Cajero>, Map<Integer,CuentaBancaria>) : void
+    - hidratarSelectOne(TransaccionCajero) : boolean
+}
+
+class TransaccionCajero #FFFFFF {
+    - idTransaccionCajero : Integer
+    - cajeroTransaccionCajero : Cajero
+    - cuentaTransaccionCajero : CuentaBancaria
+    - tipoTransaccionCajero : String
+    - valorTransaccionCajero : BigDecimal
+    - fechaTransaccionCajero : OffsetDateTime
+    + TransaccionCajero()
+}
+
+class TransferenciaMapeador #FFFFFF {
+    + SINGLETON : TransferenciaMapeador
+    - TransferenciaMapeador()
+    + toEntityFromCrear(TransferenciaCrearDto) : Transferencia
+    + toEntityFromActualizar(TransferenciaActualizarDto) : Transferencia
+    + toCrearDto(Transferencia) : TransferenciaCrearDto
+    + toActualizarDto(Transferencia) : TransferenciaActualizarDto
+    + toDto(Transferencia) : TransferenciaDto
+    + toDtoList(List<Transferencia>) : List<TransferenciaDto>
+}
+
+class ProductoFinacieroRepositorioImpl #FFFFFF {
+    + ProductoFinacieroRepositorioImpl(boolean)
+}
+
+class RutaSucursalEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteProductoSucursalCrearDto <<record>> #9EC5FF {
+    + idCliente : Integer
+    + idProductoFinanciero : Integer
+    + idSucursal : Integer
+    + fechaAdquisicion : OffsetDateTime
+    + valorInicial : BigDecimal
+    + estado : String
+}
+
+class RutaTarjetaCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class TransaccionCajeroMapeador #FFFFFF {
+    + SINGLETON : TransaccionCajeroMapeador
+    - TransaccionCajeroMapeador()
+    + toDto(TransaccionCajero) : TransaccionCajeroDto
+    + toEntityFromCrear(TransaccionCajeroCrearDto) : TransaccionCajero
+    + toEntityFromActualizar(TransaccionCajeroActualizarDto) : TransaccionCajero
+    + toDtoList(List<TransaccionCajero>) : List<TransaccionCajeroDto>
+}
+
+class RutaMovimientoCuentaEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+interface TransaccionCajeroRepositorio #CCFFCC {
+}
+
+class ClienteProductoSucursalServicio #FFFFFF {
+    - clienteProductoSucursalRepositorio : ClienteProductoSucursalRepositorio
+    - clienteRepositorio : ClienteRepositorio
+    - productoFinancieroRepositorio : ProductoFinacieroRepositorio
+    - sucursalRepositorio : SucursalRepositorio
+    + ClienteProductoSucursalServicio(ClienteProductoSucursalRepositorio, ClienteRepositorio, ProductoFinacieroRepositorio, SucursalRepositorio)
+    - toPk(ClienteProductoSucursalIdentificadorDto) : ClienteProductoSucursalPk
+    - buscarEntidadPorPk(ClienteProductoSucursalPk) : ClienteProductoSucursal
+    + insertInto(ClienteProductoSucursalCrearDto) : ClienteProductoSucursalCrearDto
+    + updateSet(ClienteProductoSucursalIdentificadorDto, ClienteProductoSucursalActualizarDto) : ClienteProductoSucursalActualizarDto
+    + deleteFrom(ClienteProductoSucursalIdentificadorDto) : Boolean
+    + countRows() : int
+    + selectFrom() : List<ClienteProductoSucursalDto>
+    + selectOne(ClienteProductoSucursalIdentificadorDto) : ClienteProductoSucursalDto
+    - mapaClientes(List<Cliente>) : Map<Integer,Cliente>
+    - mapaProductos(List<ProductoFinanciero>) : Map<Integer,ProductoFinanciero>
+    - mapaSucursales(List<Sucursal>) : Map<Integer,Sucursal>
+    - sinClienteNulo(List<ClienteProductoSucursal>) : List<ClienteProductoSucursal>
+    - sinClienteInexistente(List<ClienteProductoSucursal>, Map<Integer,Cliente>) : List<ClienteProductoSucursal>
+    - sinProductoNulo(List<ClienteProductoSucursal>) : List<ClienteProductoSucursal>
+    - sinProductoInexistente(List<ClienteProductoSucursal>, Map<Integer,ProductoFinanciero>) : List<ClienteProductoSucursal>
+    - sinSucursalNula(List<ClienteProductoSucursal>) : List<ClienteProductoSucursal>
+    - sinSucursalInexistente(List<ClienteProductoSucursal>, Map<Integer,Sucursal>) : List<ClienteProductoSucursal>
+    - hidratarRelaciones(List<ClienteProductoSucursal>, Map<Integer,Cliente>, Map<Integer,ProductoFinanciero>, Map<Integer,Sucursal>) : void
+}
+
+class SucursalServicio #FFFFFF {
+    - repositorio : SucursalRepositorio
+    + SucursalServicio(SucursalRepositorio)
+    + insertInto(SucursalCrearDto) : SucursalDto
+    + updateSet(Integer, SucursalActualizarDto) : SucursalDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<SucursalDto>
+    + selectOne(Integer) : SucursalDto
+    + countRows() : int
+    + lastSerial() : int
+}
+
+abstract class BasePersistencia #FFBC68 {
+    # DIR_PROYECTO : Path
+    # CARPETA_PERSISTENCIA : Path
+    # prepararArchivo(String) : Path
+}
+
+class RutaPrestamoAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteProductoSucursalMapeador #FFFFFF {
+    + SINGLETON : ClienteProductoSucursalMapeador
+    - ClienteProductoSucursalMapeador()
+    + toEntityFromCrear(ClienteProductoSucursalCrearDto) : ClienteProductoSucursal
+    + toEntityFromActualizar(ClienteProductoSucursalActualizarDto) : ClienteProductoSucursal
+    + toCrearDto(ClienteProductoSucursal) : ClienteProductoSucursalCrearDto
+    + toActualizarDto(ClienteProductoSucursal) : ClienteProductoSucursalActualizarDto
+}
+
+class TarjetaDto <<record>> #9EC5FF {
+    + idTarjeta : Integer
+    + numeroTarjeta : String
+    + tipoTarjeta : String
+    + fechaExpedicionTarjeta : OffsetDateTime
+    + fechaVencimientoTarjeta : OffsetDateTime
+    + estadoTarjeta : String
+    + cliente : ClienteDto
+    + cuenta : CuentaBancariaDto
+}
+
+class Transferencia #FFFFFF {
+    - idTransferencia : Integer
+    - idTransferenciaPk : TransferenciaPk
+    - fechaTransferencia : OffsetDateTime
+    - valorTransferencia : BigDecimal
+    - descripcionTransferencia : String
+    + Transferencia(Integer, Integer)
+    + Transferencia(Integer, Integer, BigDecimal)
+}
+
+class ConsumoTarjetaControlador #FFFFFF {
+    - servicio : ConsumoTarjetaServicio
+    + ConsumoTarjetaControlador(ConsumoTarjetaServicio)
+    + crear(ConsumoTarjetaCrearDto) : Optional<ConsumoTarjetaDto>
+    + actualizar(Integer, ConsumoTarjetaActualizarDto) : Optional<ConsumoTarjetaDto>
+    + obtenerTodos() : List<ConsumoTarjetaDto>
+    + obtenerUno(Integer) : Optional<ConsumoTarjetaDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class TransaccionCajeroCrearDto <<record>> #9EC5FF {
+    + idCajero : Integer
+    + idCuenta : Integer
+    + tipoTransaccionCajero : String
+    + valorTransaccionCajero : BigDecimal
+    + fechaTransaccionCajero : OffsetDateTime
+}
+
+class CuentaBancariaCrearDto <<record>> #9EC5FF {
+    + numeroCuentaBancaria : String
+    + tipoCuentaBancaria : String
+    + saldoCuentaBancaria : BigDecimal
+    + fechaAperturaCuentaBancaria : OffsetDateTime
+    + estadoCuentaBancaria : String
+    + idCliente : Integer
+}
+
+class TarjetaRepositorioImpl #FFFFFF {
+    + TarjetaRepositorioImpl(boolean)
+}
+
+class CuentaBancariaServicio #FFFFFF {
+    - repositorio : CuentaBancariaRepositorio
+    - clienteRepositorio : ClienteRepositorio
+    + CuentaBancariaServicio(CuentaBancariaRepositorio, ClienteRepositorio)
+    + insertInto(CuentaBancariaCrearDto) : CuentaBancariaDto
+    + updateSet(Integer, CuentaBancariaActualizarDto) : CuentaBancariaDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<CuentaBancariaDto>
+    + selectOne(Integer) : CuentaBancariaDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaClientes(List<Cliente>) : Map<Integer,Cliente>
+    - sinClienteNulo(List<CuentaBancaria>) : List<CuentaBancaria>
+    - sinClienteInexistente(List<CuentaBancaria>, Map<Integer,Cliente>) : List<CuentaBancaria>
+    - hidratarCliente(List<CuentaBancaria>, Map<Integer,Cliente>) : void
+    - hidratarSelectOne(CuentaBancaria) : boolean
+}
+
+class ProductoFinancieroActualizarDto <<record>> #9EC5FF {
+    + idProductoFinanciero : Integer
+    + nombreProductoFinanciero : String
+    + tipoProductoFinanciero : String
+    + tasaInteresProductoFinanciero : BigDecimal
+    + descripcionProductoFinanciero : String
+}
+
+class CuotaPrestamoServicio #FFFFFF {
+    - repositorio : CuotaPrestamoRepositorio
+    - prestamoRepositorio : PrestamoRepositorio
+    + CuotaPrestamoServicio(CuotaPrestamoRepositorio, PrestamoRepositorio)
+    + insertInto(CuotaPrestamoCrearDto) : CuotaPrestamoDto
+    + updateSet(Integer, CuotaPrestamoActualizarDto) : CuotaPrestamoDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<CuotaPrestamoDto>
+    + selectOne(Integer) : CuotaPrestamoDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaPrestamos(List<Prestamo>) : Map<Integer,Prestamo>
+    - sinPrestamoNulo(List<CuotaPrestamo>) : List<CuotaPrestamo>
+    - sinPrestamoInexistente(List<CuotaPrestamo>, Map<Integer,Prestamo>) : List<CuotaPrestamo>
+    - hidratarPrestamo(List<CuotaPrestamo>, Map<Integer,Prestamo>) : void
+    - hidratarSelectOne(CuotaPrestamo) : boolean
+}
+
+class ConsumoTarjetaRepositorioImpl #FFFFFF {
+    + ConsumoTarjetaRepositorioImpl(boolean)
+}
+
+class RutaCuentaBancariaEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+abstract class ControladorBancolombia #FFBC68 {
+    # modeloBase() : Map<String,Object>
+    # cargarMensajes(Peticion, Map<String,Object>) : void
+}
+
+class SucursalCrearDto <<record>> #9EC5FF {
+    + nombreSucursal : String
+    + direccionSucursal : String
+    + telefonoSucursal : String
+}
+
+class MovimientoCuentaRepositorioImpl #FFFFFF {
+    + MovimientoCuentaRepositorioImpl(boolean)
+}
+
+class CuotaPrestamoMapeador #FFFFFF {
+    + SINGLETON : CuotaPrestamoMapeador
+    - CuotaPrestamoMapeador()
+    + toDto(CuotaPrestamo) : CuotaPrestamoDto
+    + toEntityFromCrear(CuotaPrestamoCrearDto) : CuotaPrestamo
+    + toEntityFromActualizar(CuotaPrestamoActualizarDto) : CuotaPrestamo
+    + toDtoList(List<CuotaPrestamo>) : List<CuotaPrestamoDto>
+}
+
+class MovimientoCuentaServicio #FFFFFF {
+    - repositorio : MovimientoCuentaRepositorio
+    - cuentaBancariaRepositorio : CuentaBancariaRepositorio
+    + MovimientoCuentaServicio(MovimientoCuentaRepositorio, CuentaBancariaRepositorio)
+    + insertInto(MovimientoCuentaCrearDto) : MovimientoCuentaDto
+    + updateSet(Integer, MovimientoCuentaActualizarDto) : MovimientoCuentaDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<MovimientoCuentaDto>
+    + selectOne(Integer) : MovimientoCuentaDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaCuentas(List<CuentaBancaria>) : Map<Integer,CuentaBancaria>
+    - sinCuentaNula(List<MovimientoCuenta>) : List<MovimientoCuenta>
+    - sinCuentaInexistente(List<MovimientoCuenta>, Map<Integer,CuentaBancaria>) : List<MovimientoCuenta>
+    - hidratarCuenta(List<MovimientoCuenta>, Map<Integer,CuentaBancaria>) : void
+    - hidratarSelectOne(MovimientoCuenta) : boolean
+}
+
+class CuentaBancariaMapeador #FFFFFF {
+    + SINGLETON : CuentaBancariaMapeador
+    - CuentaBancariaMapeador()
+    + toDto(CuentaBancaria) : CuentaBancariaDto
+    + toEntityFromCrear(CuentaBancariaCrearDto) : CuentaBancaria
+    + toEntityFromActualizar(CuentaBancariaActualizarDto) : CuentaBancaria
+    + toDtoList(List<CuentaBancaria>) : List<CuentaBancariaDto>
+}
+
+class RutaPrestamoCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCuentaBancariaAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaSucursalListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaConsumoTarjetaListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ProductoFinancieroServicio #FFFFFF {
+    - repositorio : ProductoFinacieroRepositorio
+    + ProductoFinancieroServicio(ProductoFinacieroRepositorio)
+    + insertInto(ProductoFinancieroCrearDto) : ProductoFinancieroDto
+    + updateSet(Integer, ProductoFinancieroActualizarDto) : ProductoFinancieroDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<ProductoFinancieroDto>
+    + selectOne(Integer) : ProductoFinancieroDto
+    + countRows() : int
+    + lastSerial() : int
+}
+
+class MovimientoCuentaMapeador #FFFFFF {
+    + SINGLETON : MovimientoCuentaMapeador
+    - MovimientoCuentaMapeador()
+    + toDto(MovimientoCuenta) : MovimientoCuentaDto
+    + toEntityFromCrear(MovimientoCuentaCrearDto) : MovimientoCuenta
+    + toEntityFromActualizar(MovimientoCuentaActualizarDto) : MovimientoCuenta
+    + toDtoList(List<MovimientoCuenta>) : List<MovimientoCuentaDto>
+}
+
+class RutaMovimientoCuentaListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PlainTextJoinImpl <<library>> #E0E0E0 {
+}
+
+class ProductoFinancieroMapeador #FFFFFF {
+    + SINGLETON : ProductoFinancieroMapeador
+    - ProductoFinancieroMapeador()
+    + toDto(ProductoFinanciero) : ProductoFinancieroDto
+    + toEntityFromCrear(ProductoFinancieroCrearDto) : ProductoFinanciero
+    + toEntityFromActualizar(ProductoFinancieroActualizarDto) : ProductoFinanciero
+    + toDtoList(List<ProductoFinanciero>) : List<ProductoFinancieroDto>
+}
+
+interface ApiMapeadorCompuesto #CCFFCC {
+    + toEntityFromCrear(C) : E
+    + toEntityFromActualizar(U) : E
+    + toCrearDto(E) : C
+    + toActualizarDto(E) : U
+}
+
+class SucursalMapeador #FFFFFF {
+    + SINGLETON : SucursalMapeador
+    - SucursalMapeador()
+    + toDto(Sucursal) : SucursalDto
+    + toEntityFromCrear(SucursalCrearDto) : Sucursal
+    + toEntityFromActualizar(SucursalActualizarDto) : Sucursal
+    + toDtoList(List<Sucursal>) : List<SucursalDto>
+}
+
+class RutaProductoFinancieroListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PagoPrestamoRepositorioImpl #FFFFFF {
+    + PagoPrestamoRepositorioImpl(boolean)
+}
+
+class RutaControlador <<library>> #E0E0E0 {
+}
+
+class ClienteRepositorioImpl #FFFFFF {
+    + ClienteRepositorioImpl(boolean)
+}
+
+class RutaMovimientoCuentaAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCuentaBancariaCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCuotaPrestamoEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PlainText <<library>> #E0E0E0 {
+}
+
+class PrestamoRepositorioImpl #FFFFFF {
+    + PrestamoRepositorioImpl(boolean)
+}
+
+class PlainTextImpl <<library>> #E0E0E0 {
+}
+
+class TransferenciaCrearDto <<record>> #9EC5FF {
+    + idCuentaOrigen : Integer
+    + idCuentaDestino : Integer
+    + fechaTransferencia : OffsetDateTime
+    + valorTransferencia : BigDecimal
+    + descripcionTransferencia : String
+}
+
+class SucursalActualizarDto <<record>> #9EC5FF {
+    + idSucursal : Integer
+    + nombreSucursal : String
+    + direccionSucursal : String
+    + telefonoSucursal : String
+}
+
+class TransferenciaControlador #FFFFFF {
+    - servicio : TransferenciaServicio
+    + TransferenciaControlador(TransferenciaServicio)
+    + crear(TransferenciaCrearDto) : Optional<TransferenciaCrearDto>
+    + actualizar(TransferenciaIdentificadorDto, TransferenciaActualizarDto) : Optional<TransferenciaActualizarDto>
+    + eliminar(TransferenciaIdentificadorDto) : boolean
+    + obtenerTodos() : List<TransferenciaDto>
+    + obtenerUno(TransferenciaIdentificadorDto) : Optional<TransferenciaDto>
+    + contar() : int
+}
+
+class CajeroActualizarDto <<record>> #9EC5FF {
+    + idCajero : Integer
+    + idSucursal : Integer
+    + nombreCajero : String
+    + turnoCajero : String
+}
+
+class CuentaBancariaControlador #FFFFFF {
+    - servicio : CuentaBancariaServicio
+    + CuentaBancariaControlador(CuentaBancariaServicio)
+    + crear(CuentaBancariaCrearDto) : Optional<CuentaBancariaDto>
+    + actualizar(Integer, CuentaBancariaActualizarDto) : Optional<CuentaBancariaDto>
+    + obtenerTodos() : List<CuentaBancariaDto>
+    + obtenerUno(Integer) : Optional<CuentaBancariaDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class TransferenciaPk #FFFFFF {
+    - cuentaOrigen : CuentaBancaria
+    - cuentaDestino : CuentaBancaria
+    + TransferenciaPk(CuentaBancaria, CuentaBancaria)
+    + conIds(Integer, Integer) : TransferenciaPk
+}
+
+class OffsetDateTime <<library>> #E0E0E0 {
+}
+
+class TransferenciaDto <<record>> #9EC5FF {
+    + idTransferencia : Integer
+    + cuentaOrigen : CuentaBancariaDto
+    + cuentaDestino : CuentaBancariaDto
+    + fechaTransferencia : OffsetDateTime
+    + valorTransferencia : BigDecimal
+    + descripcionTransferencia : String
+}
+
+class ProductoFinanciero #FFFFFF {
+    - idProductoFinanciero : Integer
+    - nombreProductoFinanciero : String
+    - tipoProductoFinanciero : String
+    - tasaInteresProductoFinanciero : BigDecimal
+    - descripcionProductoFinanciero : String
+    + ProductoFinanciero()
+}
+
+class RutaClienteProductoSucursalEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PagoPrestamoActualizarDto <<record>> #9EC5FF {
+    + idPagoPrestamo : Integer
+    + idPrestamo : Integer
+    + fechaPagoPrestamo : OffsetDateTime
+    + valorPagoPrestamo : BigDecimal
+    + metodoPagoPrestamo : String
+}
+
+class Cajero #FFFFFF {
+    - idCajero : Integer
+    - sucursalCajero : Sucursal
+    - nombreCajero : String
+    - turnoCajero : String
+    + Cajero()
+}
+
+class PagoPrestamoDto <<record>> #9EC5FF {
+    + idPagoPrestamo : Integer
+    + prestamo : PrestamoDto
+    + fechaPagoPrestamo : OffsetDateTime
+    + valorPagoPrestamo : BigDecimal
+    + metodoPagoPrestamo : String
+}
+
+class ConsumoTarjetaActualizarDto <<record>> #9EC5FF {
+    + idConsumoTarjeta : Integer
+    + idTarjeta : Integer
+    + fechaConsumoTarjeta : OffsetDateTime
+    + establecimientoConsumoTarjeta : String
+    + valorConsumoTarjeta : BigDecimal
+    + cuotaConsumoTarjeta : Integer
+}
+
+class MovimientoCuenta #FFFFFF {
+    - idMovimientoCuenta : Integer
+    - cuentaMovimientoCuenta : CuentaBancaria
+    - tipoMovimientoCuenta : String
+    - valorMovimientoCuenta : BigDecimal
+    - fechaMovimientoCuenta : OffsetDateTime
+    - saldoPosteriorMovimientoCuenta : BigDecimal
+    + MovimientoCuenta()
+}
+
+class RutaMovimientoCuentaCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class MovimientoCuentaControlador #FFFFFF {
+    - servicio : MovimientoCuentaServicio
+    + MovimientoCuentaControlador(MovimientoCuentaServicio)
+    + crear(MovimientoCuentaCrearDto) : Optional<MovimientoCuentaDto>
+    + actualizar(Integer, MovimientoCuentaActualizarDto) : Optional<MovimientoCuentaDto>
+    + obtenerTodos() : List<MovimientoCuentaDto>
+    + obtenerUno(Integer) : Optional<MovimientoCuentaDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class PrestamoCrearDto <<record>> #9EC5FF {
+    + idCliente : Integer
+    + montoPrestamo : BigDecimal
+    + tasaInteresPrestamo : BigDecimal
+    + fechaDesembolsoPrestamo : OffsetDateTime
+    + estadoPrestamo : String
+}
+
+class EnsambladorWeb #FFFFFF {
+    - cajeroControlador : CajeroControlador
+    - clienteControlador : ClienteControlador
+    - clienteProductoSucursalControlador : ClienteProductoSucursalControlador
+    - consumoTarjetaControlador : ConsumoTarjetaControlador
+    - cuentaBancariaControlador : CuentaBancariaControlador
+    - cuotaPrestamoControlador : CuotaPrestamoControlador
+    - movimientoCuentaControlador : MovimientoCuentaControlador
+    - pagoPrestamoControlador : PagoPrestamoControlador
+    - prestamoControlador : PrestamoControlador
+    - productoFinancieroControlador : ProductoFinancieroControlador
+    - sucursalControlador : SucursalControlador
+    - tarjetaControlador : TarjetaControlador
+    - transaccionCajeroControlador : TransaccionCajeroControlador
+    - transferenciaControlador : TransferenciaControlador
+    + inicializador(CajeroControlador, ClienteControlador, ClienteProductoSucursalControlador, ConsumoTarjetaControlador, CuentaBancariaControlador, CuotaPrestamoControlador, MovimientoCuentaControlador, PagoPrestamoControlador, PrestamoControlador, ProductoFinancieroControlador, SucursalControlador, TarjetaControlador, TransaccionCajeroControlador, TransferenciaControlador) : void
+    + cajero() : CajeroControlador
+    + cliente() : ClienteControlador
+    + clienteProductoSucursal() : ClienteProductoSucursalControlador
+    + consumoTarjeta() : ConsumoTarjetaControlador
+    + cuentaBancaria() : CuentaBancariaControlador
+    + cuotaPrestamo() : CuotaPrestamoControlador
+    + movimientoCuenta() : MovimientoCuentaControlador
+    + pagoPrestamo() : PagoPrestamoControlador
+    + prestamo() : PrestamoControlador
+    + productoFinanciero() : ProductoFinancieroControlador
+    + sucursal() : SucursalControlador
+    + tarjeta() : TarjetaControlador
+    + transaccionCajero() : TransaccionCajeroControlador
+    + transferencia() : TransferenciaControlador
+}
+
+class RutaConsumoTarjetaAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PagoPrestamoControlador #FFFFFF {
+    - servicio : PagoPrestamoServicio
+    + PagoPrestamoControlador(PagoPrestamoServicio)
+    + crear(PagoPrestamoCrearDto) : Optional<PagoPrestamoDto>
+    + actualizar(Integer, PagoPrestamoActualizarDto) : Optional<PagoPrestamoDto>
+    + obtenerTodos() : List<PagoPrestamoDto>
+    + obtenerUno(Integer) : Optional<PagoPrestamoDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class Persistencia #FFFFFF {
+    + CLIENTE : Path
+    + CUENTA_BANCARIA : Path
+    + MOVIMIENTO_CUENTA : Path
+    + TARJETA : Path
+    + CONSUMO_TARJETA : Path
+    + PRESTAMO : Path
+    + CUOTA_PRESTAMO : Path
+    + PAGO_PRESTAMO : Path
+    + TRANSFERENCIA : Path
+    + TRANSFERENCIA_PK : Path
+    + SUCURSAL : Path
+    + CAJERO : Path
+    + TRANSACCION_CAJERO : Path
+    + PRODUCTO_FINANCIERO : Path
+    + CLIENTE_PRODUCTO_SUCURSAL : Path
+    + CLIENTE_PRODUCTO_SUCURSAL_PK : Path
+    - Persistencia()
+}
+
+interface ConsumoTarjetaRepositorio #CCFFCC {
+}
+
+class TransaccionCajeroDto <<record>> #9EC5FF {
+    + idTransaccionCajero : Integer
+    + cajero : CajeroDto
+    + cuenta : CuentaBancariaDto
+    + tipoTransaccionCajero : String
+    + valorTransaccionCajero : BigDecimal
+    + fechaTransaccionCajero : OffsetDateTime
+}
+
+class RutaClienteEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class MovimientoCuentaDto <<record>> #9EC5FF {
+    + idMovimientoCuenta : Integer
+    + cuenta : CuentaBancariaDto
+    + tipoMovimientoCuenta : String
+    + valorMovimientoCuenta : BigDecimal
+    + fechaMovimientoCuenta : OffsetDateTime
+    + saldoPosteriorMovimientoCuenta : BigDecimal
+}
+
+interface TransferenciaRepositorio #CCFFCC {
+}
+
+class CuotaPrestamoCrearDto <<record>> #9EC5FF {
+    + idPrestamo : Integer
+    + numeroCuotaPrestamo : Integer
+    + fechaVencimientoCuotaPrestamo : OffsetDateTime
+    + valorCuotaPrestamo : BigDecimal
+    + estadoCuotaPrestamo : String
+}
+
+interface CuentaBancariaRepositorio #CCFFCC {
+}
+
+class PrestamoServicio #FFFFFF {
+    - repositorio : PrestamoRepositorio
+    - clienteRepositorio : ClienteRepositorio
+    + PrestamoServicio(PrestamoRepositorio, ClienteRepositorio)
+    + insertInto(PrestamoCrearDto) : PrestamoDto
+    + updateSet(Integer, PrestamoActualizarDto) : PrestamoDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<PrestamoDto>
+    + selectOne(Integer) : PrestamoDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaClientes(List<Cliente>) : Map<Integer,Cliente>
+    - sinClienteNulo(List<Prestamo>) : List<Prestamo>
+    - sinClienteInexistente(List<Prestamo>, Map<Integer,Cliente>) : List<Prestamo>
+    - hidratarCliente(List<Prestamo>, Map<Integer,Cliente>) : void
+    - hidratarSelectOne(Prestamo) : boolean
+}
+
+class TarjetaActualizarDto <<record>> #9EC5FF {
+    + idTarjeta : Integer
+    + numeroTarjeta : String
+    + tipoTarjeta : String
+    + fechaExpedicionTarjeta : OffsetDateTime
+    + fechaVencimientoTarjeta : OffsetDateTime
+    + estadoTarjeta : String
+    + idCliente : Integer
+    + idCuenta : Integer
+}
+
+class Cliente #FFFFFF {
+    - idCliente : Integer
+    - nombreCliente : String
+    - documentoCliente : String
+    - correoCliente : String
+    - celularCliente : String
+    - fechaNacimientoCliente : OffsetDateTime
+    - direccionCliente : String
+    + Cliente()
+}
+
+class CuotaPrestamoActualizarDto <<record>> #9EC5FF {
+    + idCuotaPrestamo : Integer
+    + idPrestamo : Integer
+    + numeroCuotaPrestamo : Integer
+    + fechaVencimientoCuotaPrestamo : OffsetDateTime
+    + valorCuotaPrestamo : BigDecimal
+    + estadoCuotaPrestamo : String
+}
+
+class RutaCuotaPrestamoListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCuentaBancariaListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteProductoSucursalDto <<record>> #9EC5FF {
+    + cliente : ClienteDto
+    + productoFinanciero : ProductoFinancieroDto
+    + sucursal : SucursalDto
+    + fechaAdquisicion : OffsetDateTime
+    + valorInicial : BigDecimal
+    + estado : String
+}
+
+class CuentaBancariaActualizarDto <<record>> #9EC5FF {
+    + idCuentaBancaria : Integer
+    + numeroCuentaBancaria : String
+    + tipoCuentaBancaria : String
+    + saldoCuentaBancaria : BigDecimal
+    + fechaAperturaCuentaBancaria : OffsetDateTime
+    + estadoCuentaBancaria : String
+    + idCliente : Integer
+}
+
+class PrestamoMapeador #FFFFFF {
+    + SINGLETON : PrestamoMapeador
+    - PrestamoMapeador()
+    + toDto(Prestamo) : PrestamoDto
+    + toEntityFromCrear(PrestamoCrearDto) : Prestamo
+    + toEntityFromActualizar(PrestamoActualizarDto) : Prestamo
+    + toDtoList(List<Prestamo>) : List<PrestamoDto>
+}
+
+class PrestamoDto <<record>> #9EC5FF {
+    + idPrestamo : Integer
+    + cliente : ClienteDto
+    + montoPrestamo : BigDecimal
+    + tasaInteresPrestamo : BigDecimal
+    + fechaDesembolsoPrestamo : OffsetDateTime
+    + estadoPrestamo : String
+}
+
+class CajeroCrearDto <<record>> #9EC5FF {
+    + idSucursal : Integer
+    + nombreCajero : String
+    + turnoCajero : String
+}
+
+interface PagoPrestamoRepositorio #CCFFCC {
+}
+
+class TransferenciaRepositorioImpl #FFFFFF {
+    + TransferenciaRepositorioImpl()
+}
+
+class RutaClienteAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class CuentaBancariaDto <<record>> #9EC5FF {
+    + idCuentaBancaria : Integer
+    + numeroCuentaBancaria : String
+    + tipoCuentaBancaria : String
+    + saldoCuentaBancaria : BigDecimal
+    + fechaAperturaCuentaBancaria : OffsetDateTime
+    + estadoCuentaBancaria : String
+    + cliente : ClienteDto
+}
+
+class RutaClienteProductoSucursalListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class CuentaBancaria #FFFFFF {
+    - idCuentaBancaria : Integer
+    - numeroCuentaBancaria : String
+    - tipoCuentaBancaria : String
+    - saldoCuentaBancaria : BigDecimal
+    - fechaAperturaCuentaBancaria : OffsetDateTime
+    - estadoCuentaBancaria : String
+    - clienteCuentaBancaria : Cliente
+    + CuentaBancaria()
+}
+
+class ConsumoTarjeta #FFFFFF {
+    - idConsumoTarjeta : Integer
+    - tarjetaConsumoTarjeta : Tarjeta
+    - fechaConsumoTarjeta : OffsetDateTime
+    - establecimientoConsumoTarjeta : String
+    - valorConsumoTarjeta : BigDecimal
+    - cuotaConsumoTarjeta : Integer
+    + ConsumoTarjeta()
+}
+
+class ClienteCrearDto <<record>> #9EC5FF {
+    + nombreCliente : String
+    + documentoCliente : String
+    + correoCliente : String
+    + celularCliente : String
+    + fechaNacimientoCliente : OffsetDateTime
+    + direccionCliente : String
+}
+
+class TarjetaServicio #FFFFFF {
+    - repositorio : TarjetaRepositorio
+    - clienteRepositorio : ClienteRepositorio
+    - cuentaBancariaRepositorio : CuentaBancariaRepositorio
+    + TarjetaServicio(TarjetaRepositorio, ClienteRepositorio, CuentaBancariaRepositorio)
+    + insertInto(TarjetaCrearDto) : TarjetaDto
+    + updateSet(Integer, TarjetaActualizarDto) : TarjetaDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<TarjetaDto>
+    + selectOne(Integer) : TarjetaDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaClientes(List<Cliente>) : Map<Integer,Cliente>
+    - mapaCuentas(List<CuentaBancaria>) : Map<Integer,CuentaBancaria>
+    - sinClienteNulo(List<Tarjeta>) : List<Tarjeta>
+    - sinClienteInexistente(List<Tarjeta>, Map<Integer,Cliente>) : List<Tarjeta>
+    - sinCuentaNula(List<Tarjeta>) : List<Tarjeta>
+    - sinCuentaInexistente(List<Tarjeta>, Map<Integer,CuentaBancaria>) : List<Tarjeta>
+    - hidratarRelaciones(List<Tarjeta>, Map<Integer,Cliente>, Map<Integer,CuentaBancaria>) : void
+    - hidratarSelectOne(Tarjeta) : boolean
+}
+
+class Ruteo #FFFFFF {
+    - registrarPaginasPrincipales(Router) : void
+    - registrarArchivosEstaticos(Router) : void
+    + registrar(Router) : void
+}
+
+class CuotaPrestamo #FFFFFF {
+    - idCuotaPrestamo : Integer
+    - prestamoCuotaPrestamo : Prestamo
+    - numeroCuotaPrestamo : Integer
+    - fechaVencimientoCuotaPrestamo : OffsetDateTime
+    - valorCuotaPrestamo : BigDecimal
+    - estadoCuotaPrestamo : String
+    + CuotaPrestamo()
+}
+
+class TarjetaMapeador #FFFFFF {
+    + SINGLETON : TarjetaMapeador
+    - TarjetaMapeador()
+    + toDto(Tarjeta) : TarjetaDto
+    + toEntityFromCrear(TarjetaCrearDto) : Tarjeta
+    + toEntityFromActualizar(TarjetaActualizarDto) : Tarjeta
+    + toDtoList(List<Tarjeta>) : List<TarjetaDto>
+}
+
+class RegistroRutas <<library>> #E0E0E0 {
+}
+
+class SucursalControlador #FFFFFF {
+    - servicio : SucursalServicio
+    + SucursalControlador(SucursalServicio)
+    + crear(SucursalCrearDto) : Optional<SucursalDto>
+    + actualizar(Integer, SucursalActualizarDto) : Optional<SucursalDto>
+    + obtenerTodos() : List<SucursalDto>
+    + obtenerUno(Integer) : Optional<SucursalDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class RutaProductoFinancieroAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class Peticion <<library>> #E0E0E0 {
+}
+
+class RutaClienteListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ProductoFinancieroControlador #FFFFFF {
+    - servicio : ProductoFinancieroServicio
+    + ProductoFinancieroControlador(ProductoFinancieroServicio)
+    + crear(ProductoFinancieroCrearDto) : Optional<ProductoFinancieroDto>
+    + actualizar(Integer, ProductoFinancieroActualizarDto) : Optional<ProductoFinancieroDto>
+    + obtenerTodos() : List<ProductoFinancieroDto>
+    + obtenerUno(Integer) : Optional<ProductoFinancieroDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class ProductoFinancieroDto <<record>> #9EC5FF {
+    + idProductoFinanciero : Integer
+    + nombreProductoFinanciero : String
+    + tipoProductoFinanciero : String
+    + tasaInteresProductoFinanciero : BigDecimal
+    + descripcionProductoFinanciero : String
+}
+
+class RutaClienteCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+interface ApiOperacionServicio #CCFFCC {
+    + insertInto(C) : R
+    + updateSet(ID, U) : R
+    + deleteFrom(ID) : Boolean
+    + selectFrom() : List<R>
+    + selectOne(ID) : R
+    + countRows() : int
+    + lastSerial() : int
+}
+
+class RutaTarjetaEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ClienteControlador #FFFFFF {
+    - servicio : ClienteServicio
+    + ClienteControlador(ClienteServicio)
+    + crear(ClienteCrearDto) : Optional<ClienteDto>
+    + actualizar(Integer, ClienteActualizarDto) : Optional<ClienteDto>
+    + obtenerTodos() : List<ClienteDto>
+    + obtenerUno(Integer) : Optional<ClienteDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class RutaConsumoTarjetaCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class PagoPrestamoServicio #FFFFFF {
+    - repositorio : PagoPrestamoRepositorio
+    - prestamoRepositorio : PrestamoRepositorio
+    + PagoPrestamoServicio(PagoPrestamoRepositorio, PrestamoRepositorio)
+    + insertInto(PagoPrestamoCrearDto) : PagoPrestamoDto
+    + updateSet(Integer, PagoPrestamoActualizarDto) : PagoPrestamoDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<PagoPrestamoDto>
+    + selectOne(Integer) : PagoPrestamoDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaPrestamos(List<Prestamo>) : Map<Integer,Prestamo>
+    - sinPrestamoNulo(List<PagoPrestamo>) : List<PagoPrestamo>
+    - sinPrestamoInexistente(List<PagoPrestamo>, Map<Integer,Prestamo>) : List<PagoPrestamo>
+    - hidratarPrestamo(List<PagoPrestamo>, Map<Integer,Prestamo>) : void
+    - hidratarSelectOne(PagoPrestamo) : boolean
+}
+
+class ClienteProductoSucursalControlador #FFFFFF {
+    - servicio : ClienteProductoSucursalServicio
+    + ClienteProductoSucursalControlador(ClienteProductoSucursalServicio)
+    + crear(ClienteProductoSucursalCrearDto) : Optional<ClienteProductoSucursalCrearDto>
+    + actualizar(ClienteProductoSucursalIdentificadorDto, ClienteProductoSucursalActualizarDto) : Optional<ClienteProductoSucursalActualizarDto>
+    + eliminar(ClienteProductoSucursalIdentificadorDto) : boolean
+    + obtenerTodos() : List<ClienteProductoSucursalDto>
+    + obtenerUno(ClienteProductoSucursalIdentificadorDto) : Optional<ClienteProductoSucursalDto>
+    + contar() : int
+}
+
+class TarjetaCrearDto <<record>> #9EC5FF {
+    + numeroTarjeta : String
+    + tipoTarjeta : String
+    + fechaExpedicionTarjeta : OffsetDateTime
+    + fechaVencimientoTarjeta : OffsetDateTime
+    + estadoTarjeta : String
+    + idCliente : Integer
+    + idCuenta : Integer
+}
+
+class PagoPrestamoMapeador #FFFFFF {
+    + SINGLETON : PagoPrestamoMapeador
+    - PagoPrestamoMapeador()
+    + toDto(PagoPrestamo) : PagoPrestamoDto
+    + toEntityFromCrear(PagoPrestamoCrearDto) : PagoPrestamo
+    + toEntityFromActualizar(PagoPrestamoActualizarDto) : PagoPrestamo
+    + toDtoList(List<PagoPrestamo>) : List<PagoPrestamoDto>
+}
+
+class ClienteProductoSucursalIdentificadorDto <<record>> #9EC5FF {
+    + idCliente : int
+    + idProductoFinanciero : int
+    + idSucursal : int
+}
+
+class RutaCajeroAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class TransferenciaIdentificadorDto <<record>> #9EC5FF {
+    + idCuentaOrigen : Integer
+    + idCuentaDestino : Integer
+}
+
+class ClienteProductoSucursalRepositorioImpl #FFFFFF {
+    + ClienteProductoSucursalRepositorioImpl()
+}
+
+interface MovimientoCuentaRepositorio #CCFFCC {
+}
+
+class SucursalDto <<record>> #9EC5FF {
+    + idSucursal : Integer
+    + nombreSucursal : String
+    + direccionSucursal : String
+    + telefonoSucursal : String
+}
+
+class RutaProductoFinancieroCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class Prestamo #FFFFFF {
+    - idPrestamo : Integer
+    - clientePrestamo : Cliente
+    - montoPrestamo : BigDecimal
+    - tasaInteresPrestamo : BigDecimal
+    - fechaDesembolsoPrestamo : OffsetDateTime
+    - estadoPrestamo : String
+    + Prestamo()
+}
+
+interface SucursalRepositorio #CCFFCC {
+}
+
+class SucursalRepositorioImpl #FFFFFF {
+    + SucursalRepositorioImpl(boolean)
+}
+
+class CajeroServicio #FFFFFF {
+    - repositorio : CajeroRepositorio
+    - sucursalRepositorio : SucursalRepositorio
+    + CajeroServicio(CajeroRepositorio, SucursalRepositorio)
+    + insertInto(CajeroCrearDto) : CajeroDto
+    + updateSet(Integer, CajeroActualizarDto) : CajeroDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<CajeroDto>
+    + selectOne(Integer) : CajeroDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaSucursales(List<Sucursal>) : Map<Integer,Sucursal>
+    - sinSucursalNula(List<Cajero>) : List<Cajero>
+    - sinSucursalInexistente(List<Cajero>, Map<Integer,Sucursal>) : List<Cajero>
+    - hidratarSucursal(List<Cajero>, Map<Integer,Sucursal>) : void
+    - hidratarSelectOne(Cajero) : boolean
+}
+
+class RutaClienteProductoSucursalAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCuotaPrestamoAdmin #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaCajeroCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+interface ClienteRepositorio #CCFFCC {
+}
+
+class Path <<library>> #E0E0E0 {
+}
+
+class CajeroMapeador #FFFFFF {
+    + SINGLETON : CajeroMapeador
+    - CajeroMapeador()
+    + toDto(Cajero) : CajeroDto
+    + toEntityFromCrear(CajeroCrearDto) : Cajero
+    + toEntityFromActualizar(CajeroActualizarDto) : Cajero
+    + toDtoList(List<Cajero>) : List<CajeroDto>
+}
+
+class RutaPrestamoEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class RutaTarjetaListar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ProductoFinancieroCrearDto <<record>> #9EC5FF {
+    + nombreProductoFinanciero : String
+    + tipoProductoFinanciero : String
+    + tasaInteresProductoFinanciero : BigDecimal
+    + descripcionProductoFinanciero : String
+}
+
+class PrestamoControlador #FFFFFF {
+    - servicio : PrestamoServicio
+    + PrestamoControlador(PrestamoServicio)
+    + crear(PrestamoCrearDto) : Optional<PrestamoDto>
+    + actualizar(Integer, PrestamoActualizarDto) : Optional<PrestamoDto>
+    + obtenerTodos() : List<PrestamoDto>
+    + obtenerUno(Integer) : Optional<PrestamoDto>
+    + eliminar(Integer) : boolean
+    + contar() : int
+    + ultimoSerial() : int
+}
+
+class RutaCajeroEditar #FFFFFF {
+    + registrar(Router) : void
+}
+
+class TransaccionCajeroRepositorioImpl #FFFFFF {
+    + TransaccionCajeroRepositorioImpl(boolean)
+}
+
+class Tarjeta #FFFFFF {
+    - idTarjeta : Integer
+    - numeroTarjeta : String
+    - tipoTarjeta : String
+    - fechaExpedicionTarjeta : OffsetDateTime
+    - fechaVencimientoTarjeta : OffsetDateTime
+    - estadoTarjeta : String
+    - clienteTarjeta : Cliente
+    - cuentaTarjeta : CuentaBancaria
+    + Tarjeta()
+}
+
+class RutaClienteProductoSucursalCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class ConsumoTarjetaServicio #FFFFFF {
+    - repositorio : ConsumoTarjetaRepositorio
+    - tarjetaRepositorio : TarjetaRepositorio
+    + ConsumoTarjetaServicio(ConsumoTarjetaRepositorio, TarjetaRepositorio)
+    + insertInto(ConsumoTarjetaCrearDto) : ConsumoTarjetaDto
+    + updateSet(Integer, ConsumoTarjetaActualizarDto) : ConsumoTarjetaDto
+    + deleteFrom(Integer) : Boolean
+    + selectFrom() : List<ConsumoTarjetaDto>
+    + selectOne(Integer) : ConsumoTarjetaDto
+    + countRows() : int
+    + lastSerial() : int
+    - mapaTarjetas(List<Tarjeta>) : Map<Integer,Tarjeta>
+    - sinTarjetaNula(List<ConsumoTarjeta>) : List<ConsumoTarjeta>
+    - sinTarjetaInexistente(List<ConsumoTarjeta>, Map<Integer,Tarjeta>) : List<ConsumoTarjeta>
+    - hidratarTarjeta(List<ConsumoTarjeta>, Map<Integer,Tarjeta>) : void
+    - hidratarSelectOne(ConsumoTarjeta) : boolean
+}
+
+class RutaCuotaPrestamoCrear #FFFFFF {
+    + registrar(Router) : void
+}
+
+class CajeroRepositorioImpl #FFFFFF {
+    + CajeroRepositorioImpl(boolean)
+}
+
+class BigDecimal <<library>> #E0E0E0 {
+}
+
+
+' === Relaciones ===
+PagoPrestamoServicio ..> PagoPrestamoActualizarDto
+Inicializador -- ClienteProductoSucursalControlador
+ApiOperacionServicio <|.. TransaccionCajeroServicio
+TransaccionCajeroDto ..> OffsetDateTime
+ConsumoTarjetaCrearDto ..> OffsetDateTime
+ConsumoTarjetaControlador o-- ConsumoTarjetaServicio
+SucursalMapeador ..> SucursalCrearDto
+ConsumoTarjeta -- BigDecimal
+MovimientoCuentaActualizarDto ..> OffsetDateTime
+ClienteProductoSucursalServicio o-- ClienteProductoSucursalRepositorio
+ControladorBancolombia <|-- RutaCuotaPrestamoEditar
+ControladorBancolombia <|-- RutaConsumoTarjetaListar
+PrestamoServicio ..> PrestamoActualizarDto
+TransferenciaMapeador ..> Transferencia
+TransaccionCajeroDto ..> CajeroDto
+SucursalRepositorio <|.. SucursalRepositorioImpl
+RutaClienteProductoSucursalCrear ..> Router
+ClienteProductoSucursalDto ..> BigDecimal
+RutaMovimientoCuentaAdmin ..> Router
+Tarjeta -- CuentaBancaria
+ConsumoTarjetaDto ..> OffsetDateTime
+RutaTarjetaCrear ..> Router
+CuentaBancariaRepositorio <|.. CuentaBancariaRepositorioImpl
+ConsumoTarjeta -- Tarjeta
+ControladorBancolombia ..> Peticion
+CuentaBancariaDto ..> BigDecimal
+ControladorBancolombia <|-- RutaPrestamoEditar
+ClienteProductoSucursalDto ..> OffsetDateTime
+TransaccionCajeroServicio ..> TransaccionCajeroCrearDto
+ControladorBancolombia <|-- RutaClienteCrear
+EnsambladorWeb ..> TransferenciaControlador
+TransferenciaControlador ..> TransferenciaIdentificadorDto
+ControladorBancolombia <|-- RutaCuentaBancariaEditar
+CajeroControlador ..> CajeroActualizarDto
+RutaClienteProductoSucursalEditar ..> Router
+ApiMapeador <|.. PagoPrestamoMapeador
+TransferenciaDto ..> BigDecimal
+ApiMapeador <|.. ProductoFinancieroMapeador
+RutaConsumoTarjetaCrear ..> Router
+RutaCajeroCrear ..> Router
+PrestamoRepositorio <|.. PrestamoRepositorioImpl
+PlainText <|-- ConsumoTarjetaRepositorio
+PlainTextJoinImpl <|-- ClienteProductoSucursalRepositorioImpl
+TransferenciaServicio o-- CuentaBancariaRepositorio
+ClienteProductoSucursalServicio ..> ClienteProductoSucursalCrearDto
+TransferenciaDto ..> CuentaBancariaDto
+TransaccionCajeroServicio ..> TransaccionCajero
+EnsambladorWeb ..> ProductoFinancieroControlador
+SucursalControlador ..> SucursalActualizarDto
+CuotaPrestamo -- OffsetDateTime
+TarjetaMapeador ..> Tarjeta
+TransferenciaActualizarDto ..> OffsetDateTime
+RutaConsumoTarjetaListar ..> Router
+TransferenciaCrearDto ..> BigDecimal
+ConsumoTarjetaControlador ..> ConsumoTarjetaActualizarDto
+PlainTextImpl <|-- PagoPrestamoRepositorioImpl
+CajeroMapeador ..> Cajero
+ApiOperacionServicio <|.. ClienteServicio
+ControladorBancolombia <|-- RutaClienteProductoSucursalCrear
+PlainTextJoin <|-- ClienteProductoSucursalRepositorio
+TransaccionCajeroServicio o-- CajeroRepositorio
+CajeroControlador ..> CajeroCrearDto
+ClienteProductoSucursalControlador o-- ClienteProductoSucursalServicio
+CuentaBancariaDto ..> OffsetDateTime
+MovimientoCuentaCrearDto ..> OffsetDateTime
+PlainTextImpl <|-- ConsumoTarjetaRepositorioImpl
+Inicializador -- PagoPrestamoRepositorio
+CuotaPrestamoMapeador ..> CuotaPrestamo
+ConsumoTarjetaCrearDto ..> BigDecimal
+ClienteProductoSucursalServicio ..> ClienteProductoSucursalActualizarDto
+ProductoFinacieroRepositorio <|.. ProductoFinacieroRepositorioImpl
+PlainTextImpl <|-- CajeroRepositorioImpl
+ConsumoTarjetaServicio o-- TarjetaRepositorio
+Inicializador -- TransaccionCajeroRepositorio
+CuentaBancariaMapeador ..> CuentaBancaria
+PagoPrestamoServicio o-- PagoPrestamoRepositorio
+ControladorBancolombia <|-- RutaTarjetaAdmin
+PrestamoControlador o-- PrestamoServicio
+Inicializador -- CajeroServicio
+EnsambladorWeb -- ClienteProductoSucursalControlador
+ApiOperacionServicio <|.. CajeroServicio
+RutaMovimientoCuentaListar ..> Router
+Inicializador -- ClienteProductoSucursalRepositorio
+Inicializador -- PagoPrestamoControlador
+PagoPrestamoMapeador ..> PagoPrestamoActualizarDto
+CuentaBancariaServicio o-- CuentaBancariaRepositorio
+PagoPrestamoDto ..> OffsetDateTime
+PrestamoServicio o-- ClienteRepositorio
+ControladorBancolombia <|-- RutaCuotaPrestamoAdmin
+ControladorBancolombia <|-- RutaCajeroCrear
+CajeroMapeador ..> CajeroActualizarDto
+PagoPrestamo -- OffsetDateTime
+ControladorBancolombia <|-- RutaProductoFinancieroAdmin
+TarjetaServicio o-- TarjetaRepositorio
+CuentaBancariaServicio ..> CuentaBancariaCrearDto
+PlainText <|-- TarjetaRepositorio
+CajeroRepositorio <|.. CajeroRepositorioImpl
+PrestamoServicio o-- PrestamoRepositorio
+EnsambladorWeb ..> ClienteControlador
+EnsambladorWeb -- CajeroControlador
+TransaccionCajeroMapeador ..> TransaccionCajeroCrearDto
+MovimientoCuenta -- BigDecimal
+ProductoFinancieroCrearDto ..> BigDecimal
+TarjetaServicio o-- CuentaBancariaRepositorio
+ClienteProductoSucursalPk o-- Sucursal
+TarjetaControlador ..> TarjetaActualizarDto
+RutaPrestamoListar ..> Router
+ControladorBancolombia <|-- RutaConsumoTarjetaEditar
+ApiMapeadorCompuesto <|.. TransferenciaMapeador
+ConsumoTarjetaMapeador ..> ConsumoTarjetaCrearDto
+RutaClienteEditar ..> Router
+RutaCuotaPrestamoCrear ..> Router
+PlainText <|-- CuotaPrestamoRepositorio
+EnsambladorWeb -- PrestamoControlador
+RutaCuentaBancariaEditar ..> Router
+TransferenciaServicio ..> TransferenciaPk
+ClienteServicio ..> ClienteActualizarDto
+CuotaPrestamoServicio o-- CuotaPrestamoRepositorio
+ProductoFinanciero -- BigDecimal
+ClienteDto ..> OffsetDateTime
+ClienteMapeador ..> ClienteActualizarDto
+TransaccionCajeroServicio ..> TransaccionCajeroActualizarDto
+PrestamoServicio ..> PrestamoCrearDto
+Inicializador -- TransaccionCajeroServicio
+ConsumoTarjetaActualizarDto ..> BigDecimal
+ProductoFinancieroServicio ..> ProductoFinancieroCrearDto
+PlainTextImpl <|-- MovimientoCuentaRepositorioImpl
+Inicializador -- TransferenciaControlador
+RutaSucursalEditar ..> Router
+ProductoFinancieroControlador o-- ProductoFinancieroServicio
+TarjetaCrearDto ..> OffsetDateTime
+MovimientoCuentaServicio ..> MovimientoCuentaCrearDto
+ControladorBancolombia <|-- RutaPrestamoCrear
+ControladorBancolombia <|-- Ruteo
+CuotaPrestamoDto ..> PrestamoDto
+EnsambladorWeb ..> ClienteProductoSucursalControlador
+ClienteRepositorio <|.. ClienteRepositorioImpl
+CuotaPrestamoMapeador ..> CuotaPrestamoCrearDto
+ClienteProductoSucursal -- BigDecimal
+MovimientoCuentaServicio ..> MovimientoCuenta
+CuotaPrestamoDto ..> OffsetDateTime
+TransaccionCajeroServicio o-- TransaccionCajeroRepositorio
+ConsumoTarjetaDto ..> TarjetaDto
+Transferencia o-- TransferenciaPk
+PagoPrestamoControlador ..> PagoPrestamoCrearDto
+SucursalMapeador ..> SucursalActualizarDto
+ConsumoTarjetaDto ..> BigDecimal
+ControladorBancolombia <|-- RutaConsumoTarjetaAdmin
+CuotaPrestamoServicio o-- PrestamoRepositorio
+TransferenciaServicio ..> TransferenciaCrearDto
+PrestamoDto ..> BigDecimal
+PlainTextImpl <|-- SucursalRepositorioImpl
+PagoPrestamoMapeador ..> PagoPrestamoCrearDto
+TarjetaDto ..> CuentaBancariaDto
+RutaPrestamoCrear ..> Router
+ControladorBancolombia <|-- RutaSucursalAdmin
+EnsambladorWeb ..> CuotaPrestamoControlador
+ControladorBancolombia <|-- RutaCuentaBancariaCrear
+ClienteProductoSucursalRepositorio <|.. ClienteProductoSucursalRepositorioImpl
+TransferenciaServicio ..> TransferenciaIdentificadorDto
+ValidadorCorreo *-- Pattern
+Inicializador -- TransferenciaServicio
+ClienteMapeador ..> ClienteCrearDto
+PrestamoDto ..> OffsetDateTime
+ControladorBancolombia <|-- RutaMovimientoCuentaListar
+ProductoFinancieroMapeador ..> ProductoFinancieroActualizarDto
+PagoPrestamoServicio o-- PrestamoRepositorio
+EnsambladorWeb ..> PrestamoControlador
+Inicializador -- ClienteServicio
+MovimientoCuentaDto ..> BigDecimal
+CajeroControlador o-- CajeroServicio
+TransferenciaServicio o-- TransferenciaRepositorio
+TransaccionCajero -- BigDecimal
+ApiOperacionServicio <|.. CuentaBancariaServicio
+TransferenciaControlador ..> TransferenciaCrearDto
+PagoPrestamoRepositorio <|.. PagoPrestamoRepositorioImpl
+ConsumoTarjetaRepositorio <|.. ConsumoTarjetaRepositorioImpl
+MovimientoCuentaControlador ..> MovimientoCuentaCrearDto
+BasePersistencia <|-- Persistencia
+ClienteProductoSucursalMapeador ..> ClienteProductoSucursalActualizarDto
+RutaProductoFinancieroAdmin ..> Router
+RutaClienteCrear ..> Router
+ClienteProductoSucursalDto ..> ClienteDto
+ClienteProductoSucursalActualizarDto ..> BigDecimal
+ClienteProductoSucursalCrearDto ..> BigDecimal
+MovimientoCuenta -- CuentaBancaria
+ControladorBancolombia <|-- RutaClienteAdmin
+RutaMovimientoCuentaCrear ..> Router
+CuentaBancariaCrearDto ..> BigDecimal
+PlainText <|-- CajeroRepositorio
+CuentaBancariaDto ..> ClienteDto
+ApiOperacionServicio <|.. TarjetaServicio
+ControladorBancolombia <|-- RutaClienteProductoSucursalListar
+PlainText <|-- CuentaBancariaRepositorio
+Inicializador -- MovimientoCuentaServicio
+ClienteControlador ..> ClienteActualizarDto
+PrestamoActualizarDto ..> OffsetDateTime
+Inicializador -- TransferenciaRepositorio
+RutaConsumoTarjetaEditar ..> Router
+Inicializador -- ProductoFinancieroControlador
+ClienteProductoSucursalActualizarDto ..> OffsetDateTime
+Prestamo -- Cliente
+SucursalServicio ..> SucursalActualizarDto
+TarjetaServicio o-- ClienteRepositorio
+PlainText <|-- ClienteRepositorio
+TransaccionCajeroActualizarDto ..> BigDecimal
+RutaSucursalCrear ..> Router
+ConsumoTarjetaServicio ..> ConsumoTarjeta
+CuotaPrestamoMapeador ..> CuotaPrestamoActualizarDto
+MovimientoCuentaControlador ..> MovimientoCuentaActualizarDto
+CuentaBancaria -- Cliente
+ControladorBancolombia <|-- RutaClienteProductoSucursalAdmin
+MovimientoCuentaServicio ..> MovimientoCuentaActualizarDto
+Inicializador -- CuentaBancariaServicio
+ClienteProductoSucursalControlador ..> ClienteProductoSucursalCrearDto
+PagoPrestamoControlador o-- PagoPrestamoServicio
+ApiMapeador <|.. PrestamoMapeador
+CuotaPrestamoControlador ..> CuotaPrestamoActualizarDto
+RutaMovimientoCuentaEditar ..> Router
+EnsambladorWeb -- TarjetaControlador
+PagoPrestamoServicio ..> PagoPrestamoCrearDto
+ClienteProductoSucursalControlador ..> ClienteProductoSucursalActualizarDto
+TarjetaServicio ..> Tarjeta
+TransaccionCajero -- OffsetDateTime
+ConsumoTarjetaActualizarDto ..> OffsetDateTime
+TarjetaActualizarDto ..> OffsetDateTime
+Inicializador -- CuotaPrestamoRepositorio
+MovimientoCuentaRepositorio <|.. MovimientoCuentaRepositorioImpl
+Cajero -- Sucursal
+CuotaPrestamoCrearDto ..> BigDecimal
+ClienteProductoSucursalServicio o-- SucursalRepositorio
+TransaccionCajeroControlador o-- TransaccionCajeroServicio
+CuentaBancariaActualizarDto ..> OffsetDateTime
+ApiMapeador <|.. CuentaBancariaMapeador
+TarjetaDto ..> ClienteDto
+ApiOperacionCompuestaServicio <|.. TransferenciaServicio
+SucursalMapeador ..> Sucursal
+TransaccionCajeroServicio o-- CuentaBancariaRepositorio
+EnsambladorWeb -- SucursalControlador
+ControladorBancolombia <|-- RutaCajeroAdmin
+Inicializador -- CuotaPrestamoControlador
+ControladorBancolombia <|-- RutaMovimientoCuentaEditar
+MovimientoCuentaServicio o-- CuentaBancariaRepositorio
+CuotaPrestamoControlador ..> CuotaPrestamoCrearDto
+RutaPrestamoEditar ..> Router
+ApiOperacionServicio <|.. MovimientoCuentaServicio
+ClienteProductoSucursalMapeador ..> ClienteProductoSucursal
+ClienteProductoSucursalMapeador ..> ClienteProductoSucursalCrearDto
+RutaCajeroListar ..> Router
+PrestamoCrearDto ..> OffsetDateTime
+PlainTextImpl <|-- CuotaPrestamoRepositorioImpl
+PrestamoMapeador ..> PrestamoCrearDto
+SucursalControlador ..> SucursalCrearDto
+RutaControlador <|-- ControladorBancolombia
+Inicializador -- CajeroRepositorio
+TarjetaServicio ..> TarjetaCrearDto
+ControladorBancolombia <|-- RutaMovimientoCuentaCrear
+PlainText <|-- PrestamoRepositorio
+Inicializador -- PrestamoRepositorio
+Inicializador -- ProductoFinancieroServicio
+EnsambladorWeb -- MovimientoCuentaControlador
+Inicializador -- CajeroControlador
+PagoPrestamoActualizarDto ..> BigDecimal
+MovimientoCuentaMapeador ..> MovimientoCuenta
+CuotaPrestamoServicio ..> CuotaPrestamoCrearDto
+CuotaPrestamoServicio ..> CuotaPrestamo
+PagoPrestamoCrearDto ..> BigDecimal
+Inicializador -- PrestamoControlador
+EnsambladorWeb -- TransferenciaControlador
+CajeroServicio ..> CajeroActualizarDto
+EnsambladorWeb -- ProductoFinancieroControlador
+EnsambladorWeb ..> TransaccionCajeroControlador
+TransaccionCajeroCrearDto ..> OffsetDateTime
+CuotaPrestamo -- BigDecimal
+ControladorBancolombia <|-- RutaClienteProductoSucursalEditar
+ProductoFinancieroDto ..> BigDecimal
+PrestamoActualizarDto ..> BigDecimal
+CuentaBancariaServicio ..> CuentaBancaria
+PlainTextImpl <|-- PrestamoRepositorioImpl
+EnsambladorWeb ..> SucursalControlador
+ApiOperacionServicio <|.. PrestamoServicio
+ClienteProductoSucursalServicio o-- ProductoFinacieroRepositorio
+CuentaBancariaControlador ..> CuentaBancariaCrearDto
+RutaCuentaBancariaAdmin ..> Router
+ProductoFinancieroServicio o-- ProductoFinacieroRepositorio
+ControladorBancolombia <|-- RutaPrestamoAdmin
+CajeroMapeador ..> CajeroCrearDto
+CuentaBancariaControlador ..> CuentaBancariaActualizarDto
+ControladorBancolombia <|-- RutaSucursalListar
+ClienteProductoSucursalPk o-- ProductoFinanciero
+TransferenciaPk o-- CuentaBancaria
+ApiMapeador <|.. CajeroMapeador
+CuotaPrestamoDto ..> BigDecimal
+EnsambladorWeb -- TransaccionCajeroControlador
+ControladorBancolombia <|-- RutaCuentaBancariaAdmin
+ClienteProductoSucursalServicio ..> ClienteProductoSucursalPk
+PlainTextJoin <|-- TransferenciaRepositorio
+ConsumoTarjetaControlador ..> ConsumoTarjetaCrearDto
+TransferenciaControlador o-- TransferenciaServicio
+EnsambladorWeb -- CuotaPrestamoControlador
+ConsumoTarjetaServicio ..> ConsumoTarjetaActualizarDto
+TransferenciaControlador ..> TransferenciaActualizarDto
+PrestamoCrearDto ..> BigDecimal
+RutaClienteProductoSucursalAdmin ..> Router
+TransferenciaMapeador ..> TransferenciaActualizarDto
+MovimientoCuentaMapeador ..> MovimientoCuentaActualizarDto
+CuotaPrestamoActualizarDto ..> OffsetDateTime
+Inicializador -- CuotaPrestamoServicio
+TransaccionCajeroDto ..> CuentaBancariaDto
+ApiOperacionServicio <|.. PagoPrestamoServicio
+EnsambladorWeb ..> MovimientoCuentaControlador
+SucursalControlador o-- SucursalServicio
+ClienteServicio o-- ClienteRepositorio
+EnsambladorWeb -- ClienteControlador
+RutaCajeroAdmin ..> Router
+TransferenciaCrearDto ..> OffsetDateTime
+ApiOperacionServicio <|.. ConsumoTarjetaServicio
+CuentaBancariaCrearDto ..> OffsetDateTime
+CuotaPrestamo -- Prestamo
+Cliente -- OffsetDateTime
+Inicializador -- TarjetaRepositorio
+PagoPrestamoActualizarDto ..> OffsetDateTime
+MovimientoCuentaActualizarDto ..> BigDecimal
+Prestamo -- BigDecimal
+CuentaBancariaServicio ..> CuentaBancariaActualizarDto
+ProductoFinancieroActualizarDto ..> BigDecimal
+PagoPrestamoDto ..> BigDecimal
+ProductoFinancieroControlador ..> ProductoFinancieroActualizarDto
+Persistencia *-- Path
+ApiMapeador <|.. SucursalMapeador
+ConsumoTarjetaServicio ..> ConsumoTarjetaCrearDto
+ApiMapeador <|.. ClienteMapeador
+ClienteProductoSucursalCrearDto ..> OffsetDateTime
+RutaProductoFinancieroListar ..> Router
+RutaCuotaPrestamoListar ..> Router
+ApiOperacionCompuestaServicio <|.. ClienteProductoSucursalServicio
+BasePersistencia *-- Path
+Tarjeta -- Cliente
+Inicializador -- TarjetaControlador
+PlainTextImpl <|-- ClienteRepositorioImpl
+EnsambladorWeb ..> ConsumoTarjetaControlador
+Inicializador -- ConsumoTarjetaRepositorio
+SucursalServicio o-- SucursalRepositorio
+TransaccionCajeroRepositorio <|.. TransaccionCajeroRepositorioImpl
+CuentaBancariaServicio o-- ClienteRepositorio
+Transferencia -- BigDecimal
+EnsambladorWeb -- ConsumoTarjetaControlador
+CuotaPrestamoActualizarDto ..> BigDecimal
+ClienteActualizarDto ..> OffsetDateTime
+PagoPrestamoControlador ..> PagoPrestamoActualizarDto
+ClienteProductoSucursal o-- ClienteProductoSucursalPk
+PlainTextJoinImpl <|-- TransferenciaRepositorioImpl
+PlainText <|-- ProductoFinacieroRepositorio
+Inicializador -- PrestamoServicio
+Inicializador -- ConsumoTarjetaControlador
+Tarjeta -- OffsetDateTime
+TarjetaMapeador ..> TarjetaActualizarDto
+MovimientoCuentaDto ..> OffsetDateTime
+ApiOperacionServicio <|.. CuotaPrestamoServicio
+Inicializador -- TarjetaServicio
+ClienteProductoSucursalDto ..> ProductoFinancieroDto
+ProductoFinancieroMapeador ..> ProductoFinancieroCrearDto
+PagoPrestamoCrearDto ..> OffsetDateTime
+TransaccionCajeroMapeador ..> TransaccionCajero
+PlainText <|-- TransaccionCajeroRepositorio
+CuentaBancaria -- BigDecimal
+ClienteProductoSucursalPk o-- Cliente
+MovimientoCuentaServicio o-- MovimientoCuentaRepositorio
+TransaccionCajeroActualizarDto ..> OffsetDateTime
+ControladorBancolombia <|-- RutaSucursalEditar
+PrestamoDto ..> ClienteDto
+PagoPrestamo -- BigDecimal
+PrestamoMapeador ..> Prestamo
+ApiMapeador <|.. TransaccionCajeroMapeador
+PagoPrestamoServicio ..> PagoPrestamo
+Inicializador -- ConsumoTarjetaServicio
+ClienteProductoSucursal -- OffsetDateTime
+PlainText <|-- SucursalRepositorio
+CuentaBancariaMapeador ..> CuentaBancariaCrearDto
+CuentaBancaria -- OffsetDateTime
+RutaTarjetaListar ..> Router
+RutaCajeroEditar ..> Router
+ApiOperacionServicio <|.. ProductoFinancieroServicio
+TransaccionCajeroDto ..> BigDecimal
+CuotaPrestamoControlador o-- CuotaPrestamoServicio
+ControladorBancolombia <|-- RutaClienteListar
+RegistroRutas <|.. Ruteo
+RutaCuotaPrestamoAdmin ..> Router
+RutaTarjetaAdmin ..> Router
+Transferencia -- OffsetDateTime
+ConsumoTarjetaServicio o-- ConsumoTarjetaRepositorio
+PlainText <|-- MovimientoCuentaRepositorio
+PlainTextImpl <|-- TarjetaRepositorioImpl
+ClienteProductoSucursalServicio ..> ClienteProductoSucursalIdentificadorDto
+Inicializador -- SucursalControlador
+TarjetaDto ..> OffsetDateTime
+ApiOperacionServicio <|.. SucursalServicio
+TransaccionCajeroControlador ..> TransaccionCajeroCrearDto
+ApiMapeador <|.. ConsumoTarjetaMapeador
+CajeroDto ..> SucursalDto
+ApiMapeador <|.. CuotaPrestamoMapeador
+CajeroServicio o-- CajeroRepositorio
+RutaConsumoTarjetaAdmin ..> Router
+SucursalServicio ..> SucursalCrearDto
+ClienteCrearDto ..> OffsetDateTime
+ControladorBancolombia <|-- RutaTarjetaListar
+MovimientoCuentaCrearDto ..> BigDecimal
+ControladorBancolombia <|-- RutaMovimientoCuentaAdmin
+EnsambladorWeb ..> CuentaBancariaControlador
+EnsambladorWeb ..> PagoPrestamoControlador
+TransaccionCajero -- CuentaBancaria
+RutaProductoFinancieroCrear ..> Router
+ClienteProductoSucursalDto ..> SucursalDto
+ConsumoTarjeta -- OffsetDateTime
+EnsambladorWeb -- CuentaBancariaControlador
+ClienteProductoSucursalServicio o-- ClienteRepositorio
+RutaClienteProductoSucursalListar ..> Router
+ApiMapeadorCompuesto <|.. ClienteProductoSucursalMapeador
+ConsumoTarjetaMapeador ..> ConsumoTarjetaActualizarDto
+ClienteServicio ..> ClienteCrearDto
+Inicializador -- PagoPrestamoServicio
+Inicializador -- CuentaBancariaControlador
+PrestamoControlador ..> PrestamoActualizarDto
+TarjetaMapeador ..> TarjetaCrearDto
+CuotaPrestamoRepositorio <|.. CuotaPrestamoRepositorioImpl
+RutaPrestamoAdmin ..> Router
+TarjetaServicio ..> TarjetaActualizarDto
+TransaccionCajero -- Cajero
+ApiMapeador <|.. MovimientoCuentaMapeador
+PlainTextImpl <|-- CuentaBancariaRepositorioImpl
+ControladorBancolombia <|-- RutaProductoFinancieroListar
+Inicializador -- ClienteProductoSucursalServicio
+Inicializador -- MovimientoCuentaControlador
+TransferenciaRepositorio <|.. TransferenciaRepositorioImpl
+Inicializador -- ClienteControlador
+CuentaBancariaMapeador ..> CuentaBancariaActualizarDto
+ControladorBancolombia <|-- RutaCajeroListar
+ControladorBancolombia <|-- RutaTarjetaCrear
+PlainTextImpl <|-- TransaccionCajeroRepositorioImpl
+ProductoFinancieroControlador ..> ProductoFinancieroCrearDto
+ControladorBancolombia <|-- RutaCuotaPrestamoListar
+PrestamoControlador ..> PrestamoCrearDto
+MovimientoCuentaControlador o-- MovimientoCuentaServicio
+ControladorBancolombia <|-- RutaCuotaPrestamoCrear
+ControladorBancolombia <|-- RutaProductoFinancieroCrear
+RutaClienteAdmin ..> Router
+ApiMapeador <|.. TarjetaMapeador
+TransferenciaDto ..> OffsetDateTime
+Inicializador -- SucursalRepositorio
+PlainTextImpl <|-- ProductoFinacieroRepositorioImpl
+ControladorBancolombia <|-- RutaPrestamoListar
+TarjetaRepositorio <|.. TarjetaRepositorioImpl
+Ruteo ..> Router
+CajeroServicio ..> Cajero
+ControladorBancolombia <|-- RutaCuentaBancariaListar
+ProductoFinancieroServicio ..> ProductoFinancieroActualizarDto
+Inicializador -- SucursalServicio
+RutaProductoFinancieroEditar ..> Router
+ControladorBancolombia <|-- RutaClienteEditar
+RutaCuotaPrestamoEditar ..> Router
+PrestamoMapeador ..> PrestamoActualizarDto
+CuotaPrestamoServicio ..> CuotaPrestamoActualizarDto
+MovimientoCuentaMapeador ..> MovimientoCuentaCrearDto
+CajeroServicio ..> CajeroCrearDto
+RutaClienteListar ..> Router
+RutaSucursalAdmin ..> Router
+Inicializador -- CuentaBancariaRepositorio
+ControladorBancolombia <|-- RutaTarjetaEditar
+ProductoFinancieroMapeador ..> ProductoFinanciero
+PagoPrestamo -- Prestamo
+RutaCuentaBancariaListar ..> Router
+ClienteProductoSucursalControlador ..> ClienteProductoSucursalIdentificadorDto
+Prestamo -- OffsetDateTime
+PagoPrestamoDto ..> PrestamoDto
+Inicializador -- ProductoFinacieroRepositorio
+TransferenciaServicio ..> TransferenciaActualizarDto
+CuotaPrestamoCrearDto ..> OffsetDateTime
+Inicializador -- ClienteRepositorio
+ControladorBancolombia <|-- RutaConsumoTarjetaCrear
+ClienteMapeador ..> Cliente
+EnsambladorWeb ..> CajeroControlador
+RutaSucursalListar ..> Router
+Inicializador -- MovimientoCuentaRepositorio
+TransferenciaActualizarDto ..> BigDecimal
+CuentaBancariaControlador o-- CuentaBancariaServicio
+MovimientoCuenta -- OffsetDateTime
+EnsambladorWeb -- PagoPrestamoControlador
+EnsambladorWeb ..> TarjetaControlador
+ControladorBancolombia <|-- RutaSucursalCrear
+PagoPrestamoMapeador ..> PagoPrestamo
+TransaccionCajeroControlador ..> TransaccionCajeroActualizarDto
+ClienteControlador ..> ClienteCrearDto
+RutaCuentaBancariaCrear ..> Router
+TransaccionCajeroCrearDto ..> BigDecimal
+TarjetaControlador o-- TarjetaServicio
+ConsumoTarjetaMapeador ..> ConsumoTarjeta
+MovimientoCuentaDto ..> CuentaBancariaDto
+TarjetaControlador ..> TarjetaCrearDto
+ClienteControlador o-- ClienteServicio
+TransferenciaMapeador ..> TransferenciaCrearDto
+TransaccionCajeroMapeador ..> TransaccionCajeroActualizarDto
+RutaTarjetaEditar ..> Router
+PlainText <|-- PagoPrestamoRepositorio
+CuentaBancariaActualizarDto ..> BigDecimal
+PrestamoServicio ..> Prestamo
+ControladorBancolombia <|-- RutaProductoFinancieroEditar
+Inicializador -- TransaccionCajeroControlador
+CajeroServicio o-- SucursalRepositorio
+ControladorBancolombia <|-- RutaCajeroEditar
+@enduml

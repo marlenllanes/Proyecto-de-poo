@@ -23,8 +23,8 @@ public CajeroDto toDto(Cajero entidad) {
         return null;
     }
     return new CajeroDto(
-            entidad.getIdCajero(),
-            entidad.getSucursalCajero().getIdSucursal(),
+            entidad.getIdCajero(), 
+            SucursalMapeador.SINGLETON.toDto(entidad.getSucursalCajero()),            
             entidad.getNombreCajero(),
             entidad.getTurnoCajero()
     );
